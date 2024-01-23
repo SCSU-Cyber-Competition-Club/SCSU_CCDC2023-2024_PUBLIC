@@ -24,9 +24,12 @@ iptables -A INPUT -p udp --dport 123 -j ACCEPT
 # Allow incoming ICMP (ping) requests
 iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
 
-# Allow HTTP (port 80) and HTTPS (port 443) inbound
+# Allow HTTP (port 80), HTTPS (port 443) inbound
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow local MariaDB connections (on the loopback interface)
+iptables -A INPUT -i lo -p tcp --dport 3306 -j ACCEPT
 
 # Save the rules so they persist after a reboot
 service iptables save
