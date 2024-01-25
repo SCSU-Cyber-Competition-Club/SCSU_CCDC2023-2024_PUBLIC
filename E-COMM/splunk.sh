@@ -18,11 +18,6 @@ if [ -d "$SPLUNK_HOME" ]; then
     exit 1
 fi
 
-# Create Splunk user
-if ! sudo useradd --system --disabled-login -m -d "$SPLUNK_HOME" --shell=/bin/su --group splunk; then
-    echo "Error creating user. Exiting."
-    exit 1
-fi
 
 # Navigate to Splunk installation directory
 cd "$SPLUNK_HOME"
