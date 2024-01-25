@@ -12,7 +12,7 @@ timestamp=$(date +%Y%m%d_%H%M%S)
 backup_filename="full_backup_$timestamp.tar.gz"
 
 # Log file for capturing script output
-log_file="/var/opt/libb.log"
+log_file="/var/log/bac.log"
 
 # Function to log messages
 log() {
