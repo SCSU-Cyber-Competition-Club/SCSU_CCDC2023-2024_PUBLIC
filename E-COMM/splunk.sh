@@ -1,49 +1,59 @@
 #!/bin/bash
 
-# Check if script is run as root
-if [ "$EUID" -ne 0 ]; then
-  echo "Please run this script as root."
-  exit 1
+# Log file for installation
+log_file="/var/log/splunk_install.log"
+exec > >(sudo tee -a "$log_file") 2>&1
+echo "Log started: $(date)"
+
+# Check for dependencies
+if ! sudo command -v wget &> /dev/null; then
+    echo "wget is not installed. Please install it before running the script."
+    exit 1
 fi
 
-# Splunk Forwarder Details
-SPLUNK_FORWARDER_VERSION="8.3.3"  # Replace with the version you are using
-SPLUNK_FORWARDER_BUILD="f44afce3db66"  # Replace with the build number
+# Check if Splunk is already installed
+SPLUNK_HOME="/opt/splunkforwarder"
+if [ -d "$SPLUNK_HOME" ]; then
+    echo "Splunk is already installed. Exiting."
+    exit 1
+fi
 
-# Splunk Server Details
-SPLUNK_SERVER="172.20.242.10"
-SPLUNK_SERVER_PORT="9997"
+# Create Splunk user
+if ! sudo useradd --system --disabled-login -m -d "$SPLUNK_HOME" --shell=/bin/su --group splunk; then
+    echo "Error creating user. Exiting."
+    exit 1
+fi
 
-# Download Splunk Forwarder
-wget -O splunkforwarder-"$SPLUNK_FORWARDER_VERSION"-"$SPLUNK_FORWARDER_BUILD".rpm \
-     "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=$SPLUNK_FORWARDER_VERSION&product=universalforwarder&filename=splunkforwarder-$SPLUNK_FORWARDER_VERSION-$SPLUNK_FORWARDER_BUILD-linux-x86_64.rpm&wget=true"
+# Navigate to Splunk installation directory
+cd "$SPLUNK_HOME"
 
-# Install Splunk Forwarder
-sudo rpm -i splunkforwarder-"$SPLUNK_FORWARDER_VERSION"-"$SPLUNK_FORWARDER_BUILD".rpm
+# Set Splunk download URL
+SPLUNKURL="https://download.splunk.com/products/universalforwarder/releases/8.2.2/linux/splunkforwarder-8.2.2-87344edfcdb4-Linux-x86_64.tgz"
 
-# Start Splunk Forwarder
-/opt/splunkforwarder/bin/splunk start --accept-license --answer-yes --no-prompt
+# Download and extract Splunk
+sudo wget -O "$SPLUNK_HOME/splunkforwarder.tgz" "$SPLUNKURL"
+sudo tar -xzf "$SPLUNK_HOME/splunkforwarder.tgz"
+sudo rm "$SPLUNK_HOME/splunkforwarder.tgz"
 
-# Configure Splunk Forwarder
-cat <<EOF >> /opt/splunkforwarder/etc/system/local/inputs.conf
-[monitor:///var/log/httpd/access_log]
-disabled = false
-index = your_index
+# Set ownership and permissions
+sudo chown --recursive splunk:splunk "$SPLUNK_HOME"
 
-[monitor:///var/log/httpd/error_log]
-disabled = false
-index = your_index
-EOF
+# Start Splunk and enable boot-start
+cd "$SPLUNK_HOME/bin"
+sudo chmod 770 splunk
+sudo ./splunk start --accept-license
+sudo ./splunk enable boot-start -user splunk
 
-cat <<EOF >> /opt/splunkforwarder/etc/system/local/outputs.conf
-[tcpout]
-defaultGroup = your_indexers
+# Set Splunk server IP
+FORWARDSERVER="172.20.241.20:9997"
 
-[tcpout:your_indexers]
-server = $SPLUNK_SERVER:$SPLUNK_SERVER_PORT
-EOF
+# Add forward server
+sudo ./splunk add forward-server "$FORWARDSERVER"
 
-# Restart Splunk Forwarder
-/opt/splunkforwarder/bin/splunk restart
+# Add monitoring for /var/log
+sudo ./splunk add monitor /var/log
 
-echo "Splunk Forwarder setup complete."
+# Restart Splunk
+sudo ./splunk restart
+
+echo "Splunk installation completed successfully."
