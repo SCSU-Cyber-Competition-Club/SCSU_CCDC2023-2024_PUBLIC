@@ -11,8 +11,12 @@ SPLUNK_FORWARDER_VERSION="8.3.3"  # Replace with the version you are using
 SPLUNK_FORWARDER_BUILD="f44afce3db66"  # Replace with the build number
 
 # Splunk Server Details
-SPLUNK_SERVER="172.20.241.20"
+SPLUNK_SERVER="172.20.242.10"
 SPLUNK_SERVER_PORT="9997"
+
+# Download Splunk Forwarder
+wget -O splunkforwarder-"$SPLUNK_FORWARDER_VERSION"-"$SPLUNK_FORWARDER_BUILD".rpm \
+     "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=$SPLUNK_FORWARDER_VERSION&product=universalforwarder&filename=splunkforwarder-$SPLUNK_FORWARDER_VERSION-$SPLUNK_FORWARDER_BUILD-linux-x86_64.rpm&wget=true"
 
 # Install Splunk Forwarder
 sudo rpm -i splunkforwarder-"$SPLUNK_FORWARDER_VERSION"-"$SPLUNK_FORWARDER_BUILD".rpm
