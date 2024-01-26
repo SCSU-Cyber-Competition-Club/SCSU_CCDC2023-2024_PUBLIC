@@ -59,7 +59,6 @@ working on script still
 `sudo systemctl restart httpd`
 
 ## Mariadb
-
 `mysqladmin password <newpassword>` // this changes the database password
 `mysql -u root -p login to database` // now input new password //
 ##### Common commands for mariadb
