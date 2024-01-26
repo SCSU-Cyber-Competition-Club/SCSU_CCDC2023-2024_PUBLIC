@@ -57,3 +57,4 @@ sudo ./splunk add monitor /var/log
 sudo ./splunk restart
 
 echo "Splunk installation completed successfully."
+exit 0
