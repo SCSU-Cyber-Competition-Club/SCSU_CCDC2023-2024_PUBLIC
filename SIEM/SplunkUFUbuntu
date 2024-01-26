@@ -1,0 +1,1 @@
+wget -O splunkforwarder-9.1.3-d95b3299fa65-Linux-x86_64.tgz "https://download.splunk.com/products/universalforwarder/releases/9.1.3/linux/splunkforwarder-9.1.3-d95b3299fa65-Linux-x86_64.tgz"
