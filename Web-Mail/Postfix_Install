@@ -1,0 +1,147 @@
+Installing Postfix 
+ 
+
+Prerequisites 
+
+    A server running Ubuntu 22.04 to function as your Postfix mail server. This server should have a non-root user with sudo privileges and a firewall configured with UFW. 
+
+    A Fully Qualified Domain Name pointed at your Ubuntu 22.04 server. Be aware that if you plan on accessing mail from an external location, you will need to make sure you have an MX record pointing to your mail server as well. 
+     
+     
+
+Note that this tutorial assumes that you are configuring a host that has the FQDN of mail.ccdc.test. Wherever necessary, be sure to change ccdc.test or mail.ccdc.test to reflect your own FQDN. 
+
+Step 1 — Installing Postfix 
+
+Postfix is included in Ubuntu’s default repositories, so you can install it with APT. 
+
+To begin, update your local apt package cache: 
+
+    sudo apt update 
+     
+
+Then install the postfix package with the following command. Note that here we pass the DEBIAN_PRIORITY=low environmental variable into this installation command. This will cause the installation process to prompt you to configure some additional options: 
+
+    sudo DEBIAN_PRIORITY=low apt install postfix 
+
+ 
+
+This installation process will open a series of interactive prompts. For the purposes of this tutorial, use the following information to fill in your prompts: 
+
+    General type of mail configuration?: For this, choose Internet Site since this matches our infrastructure needs. 
+
+    System mail name: This is the base domain used to construct a valid email address when only the account portion of the address is given. For instance, let’s say the hostname of your server is mail.example.com. You will likely want to set the system mail name to example.com so that, given the username user1, Postfix will use the address user1@example.com. 
+
+    Root and postmaster mail recipient: This is the Linux account that will be forwarded mail addressed to root@ and postmaster@. Use your primary account for this. In this example case, sammy. 
+
+    Other destinations to accept mail for: This defines the mail destinations that this Postfix instance will accept. If you need to add any other domains that this server will be responsible for receiving, add those here. Otherwise, the default will be sufficient. 
+
+    Force synchronous updates on mail queue?: Since you are likely using a journaled filesystem, accept No here. 
+
+    Local networks: This is a list of the networks for which your mail server is configured to relay messages. The default will work for most scenarios. If you choose to modify it, though, make sure to be very restrictive in regards to the network range. 
+
+    Mailbox size limit: This can be used to limit the size of messages. Setting it to 0 disables any size restriction. 
+
+    Local address extension character: This is the character that can be used to separate the regular portion of the address from an extension (used to create dynamic aliases). The default, + will work for this tutorial. 
+
+    Internet protocols to use: Choose whether to restrict the IP version that Postfix supports. For the purposes of this tutorial, pick all. 
+     
+
+To be explicit, these are the settings used in this guide: 
+
+    General type of mail configuration?: Internet Site 
+
+    System mail name: ccdc.test (not mail.ccdc.test) 
+
+    Root and postmaster mail recipient: The username of your primary Linux account (dust for our examples) 
+
+    Other destinations to accept mail for: $myhostname, ccdc.test, mail.ccdc.test, localhost.example.com, localhost 
+
+    Force synchronous updates on mail queue?: No 
+
+    Local networks: 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128 
+
+    Mailbox size limit: 0 
+
+    Local address extension character: + 
+
+    Internet protocols to use: all 
+
+Note: If you need to ever return to change these settings, you can do so by typing: 
+
+    sudo dpkg-reconfigure postfix 
+     
+     
+
+The prompts will be pre-populated with your previous responses. 
+
+When you are prompted to restart services, accept the defaults and choose OK. 
+
+When the installation process finishes, you’re ready to make a few updates to your Postfix configuration. 
+
+Step 2 — Changing the Postfix Configuration 
+
+Now you can adjust some settings that the package installation process didn’t prompt you for. Many of Postfix’s configuration settings are defined in the /etc/postfix/main.cf file. Rather than editing this file directly, you can use Postfix’s postconf command to query or set configuration settings. 
+
+To begin, set the location for your non-root Ubuntu user’s mailbox. In this guide, we’ll use the Maildir format, which separates messages into individual files that are then moved between directories based on user action. The alternative option that isn’t covered in this guide is the mbox format, which stores all messages within a single file. 
+
+Set the home_mailbox variable to Maildir/. Later, you will create a directory structure under that name within your user’s home directory. Configure home_mailbox by typing: 
+
+    sudo postconf -e 'home_mailbox= Maildir/' 
+
+ 
+
+Set mailbox command to the following in order to use Maildir. 
+
+    sudo postconf -e mailbox_command= 
+
+ 
+
+ 
+ 
+
+Next, set the location of the virtual_alias_maps table, which maps arbitrary email accounts to Linux system accounts. Run the following command, which maps the table location to a hash database file named /etc/postfix/virtual: 
+
+    sudo postconf -e 'virtual_alias_maps= hash:/etc/postfix/virtual' 
+     
+
+ 
+
+Now that you’ve defined the location of the virtual maps file in your main.cf file, you can create the file itself and begin mapping email accounts to user accounts on your Linux system. Create the file with your preferred text editor; in this example, we’ll use nano: 
+
+    sudo nano /etc/postfix/virtual 
+     
+     
+
+List any addresses that you wish to accept email for, followed by a whitespace and the Linux user you’d like that mail delivered to. 
+
+For example, if you would like to accept email at contact@ccdc.test and admin@ccdc.test and would like to have those emails delivered to the dust Linux user, you could set up your file like this: 
+
+/etc/postfix/virtual 
+
+dust@ccdc.test dust 
+admin@ccdc.test dust 
+  
+
+After you’ve mapped all of the addresses to the appropriate server accounts, save and close the file. If you used nano, do this by pressing CTRL + X, Y, then ENTER. 
+
+Apply the mapping by typing: 
+
+    sudo postmap /etc/postfix/virtual 
+     
+
+Restart the Postfix process to be sure that all of your changes have been applied: 
+
+    sudo systemctl restart postfix 
+     
+
+ 
+
+add a firewall rule to allow an exception for Postfix. 
+
+sudo ufw allow Postfix 
+ 
+
+ 
+
+With that, Postfix is configured and ready to accept external connections. 

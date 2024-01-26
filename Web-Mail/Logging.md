@@ -15,7 +15,7 @@ _Custom number of lines_
 
 ### *View using vim:*
 
-	`sudo vim {logfile}`
+	`sudo vi {logfile}`
 
 ## Feodra
 
@@ -30,11 +30,14 @@ _Custom number of lines_
 *Failed login attmepts*  
 
 	`journalctl -q _AUDIT_TYPE=1112 _TRANSPORT=audit | grep failed`
+	`faillog -a`
+	`grep sshd /var/log/secure`
+	`journalctl _SYSTEMD_UNIT=sshd.service`
 
 *Checking last logins*  
 
 	`last`  
-
+	
 *SSH*
 
 	`/var/log/secure`
@@ -43,10 +46,21 @@ _Custom number of lines_
 *Cron*
 
 	`/var/log/cron`
+	`grep -i cron /var/log/syslog`
+	
+*View List of files opened by users*
+	`lsof -u <user name>`
+
+*Root user history*
+	Bash
+	`cat /root/.bash_history`
+
+	Command History
+	`cat /root/.*history `
 
 *Firewall*
 
-	`/var/log/firewalld`
+	`/var/log/iptables`
 
 *Boot*
 
@@ -60,9 +74,6 @@ _Custom number of lines_
 
 	`lsof -u <user name>`  
 
-*Bash history*
-
-	`sudo cat /home/root/.bash_history`
 
 *Checking DHCP lease logs*  
 `journalctl | grep -Ei 'dhcp'`  
@@ -77,7 +88,7 @@ _Look at the output. Find an uncommon pattern/string in the output, say "foobar"
 
 	`grep -R "foobar" /var/log/`
 
-#### [Linux log info](https://www.socinvestigation.com/linux-audit-logs-cheatsheet-detect-respond-faster/)
+
 
 ## Postfix/SMTPD
 *Default*
