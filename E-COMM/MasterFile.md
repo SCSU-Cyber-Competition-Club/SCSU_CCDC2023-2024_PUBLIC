@@ -3,6 +3,8 @@ https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC.git
 ------
 # Host Operating System Hardening
 
+### (.5)
+`sudo yum update ca-certificates`
 ##### (1) Change User Passwords
 `sudo passwd <usertochange>`
 ###### Check for other users
@@ -17,11 +19,10 @@ https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC.git
 ##### (4) Host Firewall rules
 Looks like `firewalld` is running
 `sudo yum install git` -> git clone our repo and run the `firewalld` script*
-#### TO-DO add NTP UDP 123, 323 to firewall script
+
 
 ##### (5) Backups
-grab script
-`cp -r /bak/ /` 
+~should be good~
 ##### (6) System Update
 looks like doing a system update kind of breaks things
 	- try sudo update and upgrade , probably should do this 
@@ -33,7 +34,7 @@ looks like doing a system update kind of breaks things
 ##### (9) Checking Malicious Process
 continually check `ps` or `ps aux` 
 ##### (10) Setting up forwarder
-
+working on script still
 
 ------
 # Service Hardening 
@@ -53,9 +54,15 @@ continually check `ps` or `ps aux`
 `sudo yum install mod_security -y` // installing modsecurity
 `sudo yum install mod_security_crs`
 `sudo systemctl restart httpd`
-##### mod_evasive
+##### mod_evasive (not sure if i need) 
 `sudo yum install mod_evasive -y`
 `sudo systemctl restart httpd`
 
 ## Mariadb
 
+`mysqladmin password <newpassword>` // this changes the database password
+`mysql -u root -p login to database` // now input new password //
+##### Common commands for mariadb
+`SHOW DATABASE;` // shows different databases
+`USE prestashop` // you can USE command to access table
+`SHOW TABLES;` // shows different tables
