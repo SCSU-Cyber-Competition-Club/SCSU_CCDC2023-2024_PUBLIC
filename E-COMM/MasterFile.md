@@ -20,7 +20,8 @@ Looks like `firewalld` is running
 #### TO-DO add NTP UDP 123, 323 to firewall script
 
 ##### (5) Backups
-TO-DO
+grab script
+`cp -r /bak/ /` 
 ##### (6) System Update
 looks like doing a system update kind of breaks things
 	- try sudo update and upgrade , probably should do this 
