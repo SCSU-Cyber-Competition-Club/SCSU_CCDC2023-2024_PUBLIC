@@ -14,7 +14,7 @@
 	`smptd_sender_login_maps = proxy:ldap:/etx/postfix/ad_sender_login_maps.cf`
 
 ##### CCDC
-	mynetworks = 172.20.241.0/24, 172.20.242.0/24, 172.20.240.20/24,
+	mynetworks = <netowrk1/24, network2/24,>
 
 ### Ldap config files: 
 	'/etc/postfix/ad_virtual_mailbox_maps.cf'
