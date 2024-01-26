@@ -16,6 +16,13 @@ firewall-cmd --zone=public --add-service=https
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --zone=public --add-service=https --permanent
 
+#Allow Splunk Forwarder (port 9997)
+firewall-cmd --zone=public --add-port=9997/tcp --permanent
+
+#Allow time network protocols
+firewall-cmd --zone=public --add-port=123/udp --permanent
+firewall-cmd --zone=public --add-port=323/udp --permanent
+
 # Allow DNS (UDP) outbound
 firewall-cmd --zone=public --add-service=dns
 firewall-cmd --zone=public --add-service=dns --permanent
@@ -35,7 +42,7 @@ firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --zone=public --add-service=https --permanent
 
 # Allow local MariaDB connections (on the loopback interface)
-firewall-cmd --zone=trusted --add-port=3306/tcp
+firewall-cmd --zone=trusted --add-port=3306/tcp 
 firewall-cmd --zone=trusted --add-port=3306/tcp --permanent
 
 # Reload firewalld to apply the rules
