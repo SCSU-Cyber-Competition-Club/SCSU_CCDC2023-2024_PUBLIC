@@ -241,12 +241,7 @@ function check_prereqs {
         echo "ERROR: Usage: $0 <option> <ip_address>"
         print_options
     fi
-
-    if [[ ! $3 =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-        echo "ERROR: Invalid IP address format: $3"
-        exit 1
-    fi
-    
+  
 }
 
 ################################# MAIN #################################
