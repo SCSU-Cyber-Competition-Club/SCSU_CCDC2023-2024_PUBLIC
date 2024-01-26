@@ -49,6 +49,7 @@ FORWARDSERVER="172.20.241.20:9997"
 
 # Add forward server
 sudo ./splunk add forward-server "$FORWARDSERVER"
+sudo ./splunk set deploy-poll "$FORWARDSERVER"
 
 # Add monitoring for /var/log
 sudo ./splunk add monitor /var/log
