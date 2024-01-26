@@ -229,18 +229,6 @@ function print_banner {
 }
 
 function check_prereqs {
-    # user should not be root or run `sudo ./splunf.sh` doing so makes the splunk forwarder install be owned by root
-    if [ "$EUID" == 0 ]; then
-        echo "ERROR: Please run script without sudo prefix/not as root"
-        exit 1
-    fi
-
-    #user needs sudo privileges to be able to run script
-    user_groups=$(groups)
-    if [[ $user_groups != *sudo* && $user_groups != *wheel* ]]; then
-        echo "ERROR: User needs sudo privileges. User not found in sudo/wheel group"
-        exit 1
-    fi
 
     # check if home directory exists for current user. Home directory is needed for running splunk commands since the commands are aliases for http request methods;
     # the .splunk directory contains this auth token so without it splunk fails to install
