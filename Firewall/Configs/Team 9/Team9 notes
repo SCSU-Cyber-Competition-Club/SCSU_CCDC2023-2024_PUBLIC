@@ -1,0 +1,70 @@
+turn the device to run as static
+	- conf
+		- set deviceconfig system type static
+
+- turn off management interface temperorily
+	- config mode
+		- _set deviceconfig system permitted-ip ==ipaddress== netmask xxx.xxx.xxx.xxx
+		- commit
+
+- show all admin accounts
+	- operation mode
+		- **show admins all**
+	- config
+		- delete mgt-config users ==adminName== 
+		- commit
+
+- change admin password
+	- config mode
+		- _set mgt-confg users admin passesword 
+
+- general system info
+	- operation mode
+	- **show system info**
+
+- change management interface IP address if required
+	- config mode
+		- _set deviceconfig system ip-address x.x.x.x netmask x.x.x.x default-gateway x.x.x.x_
+	- commit
+
+- only allow secure protocols to connect to Mgt interface
+	- config mode
+		- _set deviceconfig system service disable-http yes_
+		- _set deviceconfig system service disable-Telnet yes_
+		- _set deviceconfig system service disable-SNMP yes_
+	- in operation mode
+		- **show system services**
+- 
+- change the admin password
+	- config
+		- set mgt-config users admin password
+
+
+- limiting access to the interface
+	- gui
+		- device > setup > interfaces > management
+			- HTTPS
+			- SSH
+			- User-ID
+		- add permitted ip addresses to access the interface
+- turn data interfaces back on if turned off
+	- config
+		- _set network interface ethernet ethernet1/1 link-state up_
+		- commit
+- turn management interface back on
+	- config
+		- set deviceconfig system permitted-ip x.x.x.x
+	- manage FW via GUI
+
+- ==Dynamic updates== for the current malware signatures because it's a Dumb box w/o them
+	- device > Dynamic updates > check now
+- make sure to assign Security Profiles to all ==Allow Rules==
+- Custom sec profile: 
+	- objects > sec profiles
+		- Anti Virus
+		- Anti Spyware
+		- vulnerability protection
+		- URL filtering
+		- File blocking
+		- WildFire analysis
+		- DoS protection
