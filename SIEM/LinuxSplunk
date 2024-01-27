@@ -20,12 +20,14 @@ Linux splunk 5.15.0-101.103.2.1.e19uek.x86_64 #2 SMP Tue May 2 01:10:45 PDT 2023
 5.) SPLUNK STATUS
 	./splunk status
 
+6.) CHANGE SPLUNK CLI PASSWORD
+	./splunk edit user admin -password newPassowrd  -auth admin:changeme 
 
-6.) ACTIVATE WEB CONSOLE
+7.) ACTIVATE WEB CONSOLE
 	systemctl enable --now cockpit.socket
 
-7.) CONNECT TO RECEIVER
+8.) CONNECT TO RECEIVER
 	./splunk add forward-server x.x.x.x:9997
 
-8.) CHOOSE FILES TO SEND
+9.) CHOOSE FILES TO SEND
 	./splunk add monitor -auth admin:password /opt/log/ww1
