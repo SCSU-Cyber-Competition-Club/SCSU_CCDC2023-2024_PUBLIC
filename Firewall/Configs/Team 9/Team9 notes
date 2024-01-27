@@ -68,3 +68,44 @@ turn the device to run as static
 		- File blocking
 		- WildFire analysis
 		- DoS protection
+
+ More Notes to check on the gui
+	- device > setup > interface > 
+		- management interface settings
+			- static
+			- permitted IP
+				ad the machine ip you want to use
+			- admin management services
+				- https
+				- ssh
+			- network services
+				- ping
+		- service 
+			- check for valid dns
+	- go to licensing to see if its upto date
+	- dynamic updates
+		- check for updates and install them
+	- software
+	- go to administrators and see how many accounts are in there
+	- decryption for SSL and SSH
+		- cant decryption 
+			- application certificate pinning
+
+- reduce attack surface area
+	- whitelisting apps
+	- allow only secure protocols
+		- decryption policy (Objects > Decrytion)
+			- TLS
+			- Block bad or expired
+	- protect against known attacks
+		- sec profiles(objects > sec profiles)
+			- antivirus
+			- anti-spyware
+			- vulnerability protection
+			- URL filtering
+			- protect against DoS 
+	- Provide protection against unknown attacks
+		- wildfire
+
+- URL filtering and File blocking 
+- DoS protection
