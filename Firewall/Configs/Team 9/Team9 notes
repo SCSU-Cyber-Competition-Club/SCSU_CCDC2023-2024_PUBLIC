@@ -4,7 +4,7 @@ turn the device to run as static
 
 - turn off management interface temperorily
 	- config mode
-		- _set deviceconfig system permitted-ip ==ipaddress== netmask xxx.xxx.xxx.xxx
+		- _set deviceconfig system permitted-ip ==ipaddress==
 		- commit
 
 - show all admin accounts
