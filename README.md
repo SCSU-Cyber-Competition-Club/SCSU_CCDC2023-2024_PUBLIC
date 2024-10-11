@@ -1,5 +1,5 @@
-# SCSU CCDC-24/25 Practice Branch
-- This branch will be used for any repo changes. It will be merged into main when the changes are ready for the main branch.
+# SCSU CCDC-24/25 
+- Repository for SCSU Cyber Competition Club
 - Files not to be merged will be in the .gitignore file.
 
 ## Resources
