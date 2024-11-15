@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Reset firewalld to default settings
 firewall-cmd --complete-reload
@@ -10,7 +10,7 @@ firewall-cmd --set-default-zone=drop
 firewall-cmd --zone=trusted --add-interface=lo
 firewall-cmd --zone=trusted --add-interface=lo --permanent
 
-# Allow HTTP (port 80) and HTTPS (port 443) outbound
+# Allow HTTP (port 80) and HTTPS (port 443)
 firewall-cmd --zone=public --add-service=http
 firewall-cmd --zone=public --add-service=https
 firewall-cmd --zone=public --add-service=http --permanent
@@ -23,23 +23,17 @@ firewall-cmd --zone=public --add-port=9997/tcp --permanent
 firewall-cmd --zone=public --add-port=123/udp --permanent
 firewall-cmd --zone=public --add-port=323/udp --permanent
 
-# Allow DNS (UDP) outbound
+# Allow DNS (UDP)
 firewall-cmd --zone=public --add-service=dns
 firewall-cmd --zone=public --add-service=dns --permanent
 
-# Allow NTP (UDP) outbound and inbound
+# Allow NTP (UDP)
 firewall-cmd --zone=public --add-service=ntp
 firewall-cmd --zone=public --add-service=ntp --permanent
 
 # Allow incoming ICMP (ping) requests
 firewall-cmd --zone=public --add-icmp-block=echo-request
 firewall-cmd --zone=public --add-icmp-block=echo-request --permanent
-
-# Allow HTTP (port 80), HTTPS (port 443) inbound
-firewall-cmd --zone=public --add-service=http
-firewall-cmd --zone=public --add-service=https
-firewall-cmd --zone=public --add-service=http --permanent
-firewall-cmd --zone=public --add-service=https --permanent
 
 # Allow local MariaDB connections (on the loopback interface)
 firewall-cmd --zone=trusted --add-port=3306/tcp 
