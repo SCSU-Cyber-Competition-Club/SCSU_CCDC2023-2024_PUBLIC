@@ -1,2 +1,3 @@
-# SCSU_CCDC_Service_Leaders_Content
-#TEST
+## Bind DNS
+
+This Repository contians documentation on working with BIND-DNS

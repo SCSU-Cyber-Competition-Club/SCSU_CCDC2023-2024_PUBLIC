@@ -11,18 +11,18 @@ the main file you will be needing to configure to harden will be the :
 
 - in the  */etc/httpd/conf/httpd.conf* `update User apache_user, Group apache_group`
   - restart httpd service `systemctl restart httpd`
-#### Config file hardening 
+#### Config file hardening
 A couple of key things to change here in `/etc/httpd/conf/httpd.conf` are:
 
 - edit or add `ServerSignature Off`
-  
+
 - edit or add `TraceEnable Off`
 
-- Add `ServerTokens Prod` 
+- Add `ServerTokens Prod`
 
 - change or delete the *Indexes* option out of: (normally Indexes will be between Options and FollowSymLinks)
-  `Options FollowSymLinks` 
-  
+  `Options FollowSymLinks`
+
 - make sure .htaccess is set to all denied:
   *will look like this below*
 ```
@@ -33,6 +33,7 @@ A couple of key things to change here in `/etc/httpd/conf/httpd.conf` are:
 ##### Check Apache logs
 `cat /var/log/httpd/access_log`
 `cat /var/log/httpd/error_log`
+
 
 
 
