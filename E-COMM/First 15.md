@@ -6,15 +6,6 @@
 *checking for user accounts:*
 `cat /etc/passwd | grep bash`
 
-*checking for sudoers user:*
-`sudo visudo`
-
-*adding user to sudoers file*:
-`sudo visudo`
-
-(replace username with with account name)
-`john ALL=(ALL:ALL) ALL`
-
 *locking user accounts*: 
 `sudo passwd -l root` 
 
