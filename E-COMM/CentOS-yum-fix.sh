@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 repo_file=/etc/yum.repos.d/CentOS-Base.repo
 cp $(repo_file) ~/CentOS-Base.repo.backup
 sudo sed -i s/#baseurl/baseurl $(repo_file)
