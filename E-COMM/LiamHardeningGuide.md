@@ -6,6 +6,8 @@
 
 Check users - `cat /etc/passwd | grep bash`
 
+Check for apache user: `cat /etc/passwd | grep apache`
+
 lock accounts with `sudo passwd -l [username]`
 
 3. Change root password 
