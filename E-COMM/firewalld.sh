@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+read -p "Enter interface" interface
 # Reset firewalld to default settings
 firewall-cmd --complete-reload
 
@@ -7,8 +8,8 @@ firewall-cmd --complete-reload
 firewall-cmd --set-default-zone=drop
 
 # Allow loopback communication
-firewall-cmd --zone=trusted --add-interface=lo
-firewall-cmd --zone=trusted --add-interface=lo --permanent
+firewall-cmd --zone=trusted --add-interface=$interface
+firewall-cmd --zone=trusted --add-interface=$interface --permanent
 
 # Allow HTTP (port 80) and HTTPS (port 443)
 firewall-cmd --zone=public --add-service=http
