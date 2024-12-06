@@ -122,4 +122,6 @@
 
 ## Set up firewall rules for any remote services
 - This will be fleshed out in the future, for now, just use windows firewall gui
-- 3389 RDP...
+- 3389 RPD
+- 445 SMB (need?)
+- 135 WMI
