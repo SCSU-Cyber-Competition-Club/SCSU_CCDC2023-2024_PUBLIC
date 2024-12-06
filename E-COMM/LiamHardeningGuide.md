@@ -46,3 +46,13 @@ lock accounts with `sudo passwd -l [username]`
     `ServerTokens Prod`
     `Header set X-XSS-Protection "1; mode=block"`
     `Header set X-Frame-Options: "SAMEORIGIN"`
+
+16. use `sudo netstat -plant` for tcp and `sudo netstat -planu` for udp to find connections.
+
+17. `crontab -l` to check services, `crontab -u [user]` to list a specific user
+
+18. `top` or `ps` to view processes running in the background.
+
+19. `kill -9 [pid]` to kill processes
+
+20. 
