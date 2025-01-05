@@ -2,3 +2,5 @@ LDAP Firewall. Lot of potential with this depending on how configuration is set 
 reconnaisance, and the sample configuration provided will set you up nicely for this.
 You can get more granular, though; configuration can be modified to not just monitor but prevent certain actions,
 such as preventing SPN enumeration (for the sake of mitigating Kerberoasting).
+Looking at the config, the \$ placeholder in the first rule should be changed to your DC computer account. 
+For example, if your domain is myOrg, and the DC hostname is myDC, the placeholder should be changed to myOrg\myDC$.
