@@ -1,0 +1,34 @@
+{
+    "rules": [
+        {
+            "users": ["OREZ\\DC01$", "NT AUTHORITY\\SYSTEM"],
+            "action": "allow",
+            "audit": "off"
+        },
+        {
+            "operations": ["search"],
+            "attributes": ["admincount", "userpassword", "msds-allowedToDelegateTo", "ms-Mcs-AdmPwd", "servicePrincipalName"],
+            "scope": "subtree",
+            "action": "block"
+        },
+        {
+            "operations": ["search"],
+            "filter": "(samAccountType=805306368)",
+            "scope": "subtree",
+            "action": "block"
+        },
+        {
+            "operations": ["modify"],
+            "attributes": ["msDS-AllowedToActOnBehalfOfOtherIdentity", "servicePrincipalName", "msDS-AllowedToDelegateTo", "msDS-KeyCredentialLink", "scriptPath", "msTSInitialProgram", "gPCUserExtensionNames", "gPCMachineExtensionNames", "ntSecurityDescriptor", "ms-Mcs-AdmPwdExpirationTime", "msDS-GroupMSAMembership", "altSecurityIdentities", "msDS-AdditionalDnsHostName", "mSMQSignCertificates", "mSMQDigests", "sAMAccountName", "description", "displayName", "userAccountControl", "dNSHostName", "userParameters", "msDS-SupportedEncryptionTypes", "msDS-RevealOnDemandGroup", "gPCFileSysPath", "cACertificate", "primaryGroupID", "operatingSystem", "operatingSystemVersion", "EntryTTL", "userPrincipalName", "userCertificate"],
+            "action": "block"
+        },
+        {
+            "operations": ["search"],
+            "audit": "off"
+        },
+        {
+            "action":  "allow",
+            "audit": "on",
+        }
+    ]
+}
