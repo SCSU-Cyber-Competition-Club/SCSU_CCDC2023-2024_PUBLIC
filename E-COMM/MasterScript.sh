@@ -51,7 +51,8 @@ service sshd stop
 yum remove ssh
 yum remove openssh-server
 
-#running lynis
+#installing and running lynis
+git clone https://github.com/CISOfy/lynis ./lynis
 ./lynis/lynis audit system > lynis_output.txt
 
 #listing installed packages
