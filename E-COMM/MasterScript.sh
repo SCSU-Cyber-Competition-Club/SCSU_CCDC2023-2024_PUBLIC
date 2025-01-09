@@ -15,8 +15,8 @@ read -p "Enter Internal Interface: " intInterface
 read -p "Enter External Interface: " extInterface
 
 #resetting firewall to default settings
-firewall-cmd --remove-service=ssh --permanent
-firewall-cmd --remove-service=dhcpv6-client --permanent
+firewall-cmd --zone=public --remove-service=ssh --permanent
+firewall-cmd --zone=public --remove-service=dhcpv6-client --permanent
 firewall-cmd --complete-reload
 firewall-cmd --set-default-zone=drop --permanent
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
@@ -74,7 +74,14 @@ cd ..
 #listing installed packages
 yum list installed > installed_packages.txt
 
+
+#Apache Hardening
+#need to add to this
+
 #finishing script
 echo -e 'Remember to run:\n netstat -plant\n netstat-planu\n top(htop, btop)\n crontab -l [user]\n systemctl --type=service\n jobs -p (shows current jobs)\n check /etc/hosts file'
 
 
+# Need to add installation for mod_security for apache
+
+#Next adds will all be for apache hardening.
