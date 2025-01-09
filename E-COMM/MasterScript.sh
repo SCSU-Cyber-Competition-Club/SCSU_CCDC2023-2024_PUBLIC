@@ -12,6 +12,7 @@ read -p "Enter Internal Interface: " intInterface
 read -p "Enter External Interface: " extInterface
 
 #resetting firewall to default settings
+for srv in $(firewall-cmd --list-services);do firewall-cmd --remove-service=$srv; done
 firewall-cmd --complete-reload
 firewall-cmd --set-default-zone=drop --permanent
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
@@ -54,8 +55,8 @@ yum remove ssh
 yum remove openssh-server
 
 #installing and running lynis
-git clone https://github.com/CISOfy/lynis ./lynis
-./lynis/lynis audit system > lynis_output.txt
+git clone https://github.com/CISOfy/lynis
+cd lynis && ./lynis audit system > lynis_output.txt
 
 #listing installed packages
 yum list installed > installed_packages.txt
