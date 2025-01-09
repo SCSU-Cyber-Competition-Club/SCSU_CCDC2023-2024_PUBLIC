@@ -1,5 +1,7 @@
 #! /bin/bash
 
+#move this file to home directory!!
+
 #Firewall Rules
 
 #firewall inputs
