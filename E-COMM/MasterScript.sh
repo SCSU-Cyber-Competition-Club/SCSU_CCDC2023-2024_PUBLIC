@@ -56,8 +56,8 @@ yum remove openssh-server
 
 #installing and running lynis
 git clone https://github.com/CISOfy/lynis
-cd lynis && ./lynis audit system > lynis_output.txt
-
+cd lynis && ./lynis audit system > ../lynis_output.txt
+cd ..
 #listing installed packages
 yum list installed > installed_packages.txt
 
