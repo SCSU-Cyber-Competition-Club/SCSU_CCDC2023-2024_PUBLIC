@@ -2,6 +2,9 @@
 
 #move this file to home directory!!
 
+#installing dependencies
+yum install git
+
 #Firewall Rules
 
 #firewall inputs
@@ -12,7 +15,8 @@ read -p "Enter Internal Interface: " intInterface
 read -p "Enter External Interface: " extInterface
 
 #resetting firewall to default settings
-for srv in $(firewall-cmd --list-services);do firewall-cmd --remove-service=$srv; done
+firewall-cmd --remove-service=ssh --permanent
+firewall-cmd --remove-service=dhcpv6-client --permanent
 firewall-cmd --complete-reload
 firewall-cmd --set-default-zone=drop --permanent
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
@@ -48,6 +52,15 @@ firewall-cmd --reload
 firewall-cmd --list-all --zone=trusted
 firewall-cmd --list-all --zone=public
 
+#disabling ipv6 traffic. 
+echo 'net.ipv6.conf.all.disable_ipv6 = 1' >> /etc/sysctl.conf
+echo 'net.ipv6.conf.default.disable_ipv6 = 1' >> /etc/sysctl.conf
+sysctl -p
+
+echo 'This should not include ipv6 info:'
+ip a | grep inet6
+
+
 #removing ssh
 chkconfig sshd off
 service sshd stop
@@ -56,7 +69,7 @@ yum remove openssh-server
 
 #installing and running lynis
 git clone https://github.com/CISOfy/lynis
-cd lynis && ./lynis audit system > ../lynis_output.txt
+cd lynis && ./lynis audit system --report-file /home/$USER/lynis-report.dat
 cd ..
 #listing installed packages
 yum list installed > installed_packages.txt
