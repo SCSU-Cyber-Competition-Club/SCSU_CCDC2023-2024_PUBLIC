@@ -71,7 +71,7 @@ yum remove openssh-server
 
 #installing and running lynis
 git clone https://github.com/CISOfy/lynis
-cd lynis && ./lynis audit system | ansi2html -la > ../report.html
+cd lynis && ./lynis audit system | python3 ansi2html -la > ../report.html
 cd ..
 
 #listing installed packages
