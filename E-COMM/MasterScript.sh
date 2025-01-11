@@ -7,8 +7,12 @@ yum install git
 yum install python3
 pip3 install ansi2html
 
-#I think we have to add ansi2html to the PATH
 
+#add ansi2html to the PATH
+python3 --version
+read -p "Please input the python version (ex. python3.6): " pythonVer
+
+export PATH=$PATH:/usr/local/lib/$pythonVer/site-packages
 #Firewall Rules
 
 #firewall inputs
@@ -75,6 +79,9 @@ yum remove openssh-server
 git clone https://github.com/CISOfy/lynis
 cd lynis && ./lynis audit system | ansi2html -la > ../report.html
 cd ..
+
+#cleaning up after python3 install
+yum remove python3
 
 #listing installed packages
 
