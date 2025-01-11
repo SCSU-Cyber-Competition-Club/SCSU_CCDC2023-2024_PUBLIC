@@ -9,10 +9,8 @@ pip3 install ansi2html
 
 
 #add ansi2html to the PATH
-python3 --version
-read -p "Please input the python version (ex. python3.6): " pythonVer
 
-export PATH=$PATH:/usr/local/lib/$pythonVer/site-packages
+export PATH=$PATH:/usr/local/bin/
 #Firewall Rules
 
 #firewall inputs
