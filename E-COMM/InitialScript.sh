@@ -17,13 +17,14 @@ export PATH=$PATH:/usr/local/bin/
 
 systemctl enable --now firewalld
 
+ifconfig
+
 read -p "Enter Internal Interface: " intInterface
 read -p "Enter External Interface: " extInterface
 
 #resetting firewall to default settings
 firewall-cmd --zone=public --remove-service=ssh --permanent
 firewall-cmd --zone=public --remove-service=dhcpv6-client --permanent
-firewall-cmd --complete-reload
 firewall-cmd --set-default-zone=drop --permanent
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
 firewall-cmd --zone=public --add-interface=$extInterface --permanent
