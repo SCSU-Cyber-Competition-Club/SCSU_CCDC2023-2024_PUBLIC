@@ -1,6 +1,8 @@
-LDAP Firewall. Lot of potential with this depending on how configuration is set up. Its primary purpose is monitoring for LDAP 
-reconnaisance, and the sample configuration provided will set you up nicely for this.
-You can get more granular, though; configuration can be modified to not just monitor but prevent certain actions,
-such as preventing SPN enumeration (for the sake of mitigating Kerberoasting).
-Looking at the config, the \$ placeholder in the first rule should be changed to your DC computer account. 
-For example, if your domain is myOrg, and the DC hostname is myDC, the placeholder should be changed to myOrg\myDC$.
+LDAP Firewall. Lot of potential with this depending on how configuration is set up. Its primary purpose is monitoring for LDAP reconnaisance, and the sample configuration provided (ReconAuditTemplate) will set you up nicely for this.
+You can get more granular, though; configuration can be modified to not just monitor but prevent certain actions, such as preventing SPN enumeration (e.g. DACLPrevention_config).
+
+----------SETUP----------
+
+Looking at the config, the \\$ placeholder in the first rule should be changed to your DC computer account. For example, if your domain is myOrg, and the DC hostname is myDC, the placeholder should be changed to myOrg\myDC$.
+Once the files are downloaded (ensure your desired config is in the same folder as everything else), navigate to that folder in Powershell. Install with ./ldapfwmanager.exe /install. Verify with ./ldapfwmanager.exe /status. (View all commands with ./ldawfwmanager.exe /help.)
+ 
