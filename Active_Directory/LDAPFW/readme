@@ -3,6 +3,7 @@ You can get more granular, though; configuration can be modified to not just mon
 
 ----------SETUP----------
 
-Looking at the config, the \\$ placeholder in the first rule should be changed to your DC computer account. For example, if your domain is myOrg, and the DC hostname is myDC, the placeholder should be changed to myOrg\myDC$.
+Looking at the config, the \\$ placeholder in the first rule should be changed to your domain controller computer account. For example, if your domain is myOrg, and the DC hostname is myDC, the placeholder should be changed to myOrg\myDC$.
+Using Powershell, find your domain name with Get-ADDomain -Current LocalComputer. Find the DC computer account name with echo $env.computername. (This cmdlet prints the name of YOUR computer, which will be the DC in the competition.)
 Once the files are downloaded (ensure your desired config is in the same folder as everything else), navigate to that folder in Powershell. Install with ./ldapfwmanager.exe /install. Verify with ./ldapfwmanager.exe /status. (View all commands with ./ldawfwmanager.exe /help.)
  
