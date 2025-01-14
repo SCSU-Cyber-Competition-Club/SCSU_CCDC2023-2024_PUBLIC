@@ -25,7 +25,7 @@ read -p "Enter External Interface: " extInterface
 #resetting firewall to default settings
 firewall-cmd --zone=public --remove-service=ssh --permanent
 firewall-cmd --zone=public --remove-service=dhcpv6-client --permanent
-firewall-cmd --set-default-zone=drop --permanent
+firewall-cmd --get-default-zone
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
 firewall-cmd --zone=public --add-interface=$extInterface --permanent
 
