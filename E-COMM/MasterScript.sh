@@ -92,11 +92,6 @@ yum list installed > installed_packages.txt
 echo "Users in wheel group:"
 getent group wheel | cut -d: -f4 | tr ',' '\n'
 
-echo -e "\nCommon CentOS sudo configuration files:"
-echo "----------------------------------------"
-ls -la /etc/sudoers
-ls -la /etc/sudoers.d/
-
 
 #finishing script
 echo -e 'Remember to run:\n netstat -plant\n netstat-planu\n top(htop, btop)\n crontab -l [user]\n systemctl --type=service\n jobs -p (shows current jobs)\n check /etc/hosts file'
