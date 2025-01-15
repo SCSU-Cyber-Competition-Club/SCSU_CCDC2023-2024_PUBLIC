@@ -73,6 +73,7 @@ chkconfig sshd off
 service sshd stop
 yum remove ssh
 yum remove openssh-server
+yum remove cockpit
 
 #installing and running lynis
 git clone https://github.com/CISOfy/lynis
