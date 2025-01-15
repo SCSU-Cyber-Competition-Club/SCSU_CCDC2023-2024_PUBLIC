@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#need to run :"sed -i -e 's/\r$//' OWASP-MODSEC-SCRIPT.sh" on a linux machine and then push the changes into Github. For some reason, there is an invisible character that you need to cut out of the file. It currently is failing unless this is run on CentOS
+
 # Check if running as root
 if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root."
