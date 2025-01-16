@@ -33,8 +33,8 @@ firewall-cmd --zone=public --add-interface=$extInterface --permanent
 firewall-cmd --zone=public --add-service=http --permanent
 firewall-cmd --zone=public --add-service=https --permanent
 
-#allowing splunk forwarder
-firewall-cmd --zone=public --add-port=9997/tcp --permanent
+#allowing splunk forwarder (this has changed to port 8000)
+firewall-cmd --zone=public --add-port=8000/tcp --permanent
 
 #allow time network protocols
 firewall-cmd --zone=public --add-port=123/udp --permanent
