@@ -1,0 +1,79 @@
+1. Finding Users
+Linux: Use the cat /etc/passwd command to list users. This file contains user account information.
+Windows: Use net user from the command line or check the "Local Users and Groups" settings under Computer Management.
+
+2. Finding Privileged Users and Groups
+Linux: You can list groups using cat /etc/group. To check who is in the sudo or wheel group (which grants admin privileges), run grep 'sudo' /etc/group or grep 'wheel' /etc/group.
+Windows: You can check for users in the "Administrators" group using net localgroup Administrators in the Command Prompt.
+
+3. Removing a User's Privileges & Removing from Privileged Group
+Linux:
+To remove a user from a privileged group: gpasswd -d <username> <groupname> or vigr to edit the /etc/group file.
+To remove sudo privileges, edit the sudoers file using visudo and remove any lines granting sudo access to the user.
+
+Windows:
+To remove a user from the Administrators group: net localgroup Administrators <username> /delete.
+
+4. Locking or Disabling an Account
+Linux:
+Locking an account: passwd -l <username>.
+To disable: usermod -L <username> or chage -E 0 <username>.
+Windows:
+Locking an account: Use net user <username> /active:no.
+Disable: You can also disable via "Local Users and Groups" in Computer Management.
+
+5. Removing a User Account
+Linux: Use userdel <username> to remove the account. Optionally, you can add the -r flag to remove the user's home directory as well: userdel -r <username>.
+Windows: Use net user <username> /delete or delete the account via "Local Users and Groups".
+
+6. Changing a User's Password
+Linux: Use passwd <username> to change the user's password.
+Windows: Use net user <username> <newpassword> to change the password.
+
+7. Turning on Extra Logging
+Linux:
+Ensure auditd (audit daemon) is installed and configured. You can use auditctl to set up custom rules for logging specific activities.
+Modify /etc/rsyslog.conf to configure logging.
+Windows: Enable auditing through the Group Policy Management Console. You can enable "Audit logon events" or "Audit account logon events" under "Advanced Audit Policy Configuration."
+
+8. Ports Required for Your Service
+You should consult the documentation for the specific service you're running. For example:
+HTTP typically uses port 80 (TCP).
+HTTPS uses port 443 (TCP).
+FTP uses ports 21 (control) and 20 (data).
+Identify the required ports by consulting the service documentation or using netstat/ss to list open ports.
+
+9. Vulnerabilities in Your Service
+Identify vulnerabilities by running security tools such as:
+Nmap for port scanning and service version detection.
+Nikto for web application vulnerabilities.
+OpenVAS for a more comprehensive vulnerability scan.
+Always check for outdated software, weak encryption, unpatched services, and unnecessary open ports.
+
+10. Uninstalling Services to Minimize Attack Surface
+Linux: Use apt-get remove <service-name> or yum remove <service-name> to uninstall unwanted services.
+Windows: Remove unnecessary services via "Services" (services.msc) or uninstall through "Add or Remove Programs."
+
+11. Updating Software/Patching
+Linux: Use package managers like apt-get update and apt-get upgrade (for Debian-based systems) or yum update (for RHEL-based systems).
+Windows: Use Windows Update or install updates manually from the Control Panel.
+
+12. Downloading and Running Antivirus
+Linux: Use tools like ClamAV (apt-get install clamav), then run clamscan to scan for malware.
+Windows: Install antivirus software (e.g., Windows Defender, Malwarebytes), and schedule regular scans.
+
+13. Finding Files with Weak Permissions
+Linux: Use find / -type f ! -perm 644 to search for files with insecure permissions. Look for files that are writable by unauthorized users.
+Windows: Use PowerShell to check file permissions (Get-Acl <file>).
+
+14. Enforcing Strong Password Policies
+Linux: Modify /etc/login.defs to enforce password complexity, aging, and history. Use pam_pwquality.so in /etc/pam.d/common-password.
+Windows: Use "Local Group Policy Editor" or "Active Directory Users and Computers" to set password complexity and length policies.
+
+15. Disabling Remote Access
+Linux: Disable remote SSH access by commenting out or removing the PermitRootLogin and PasswordAuthentication lines in /etc/ssh/sshd_config, and then restarting SSH: systemctl restart sshd.
+Windows: Disable Remote Desktop from the "System Properties" -> "Remote" tab or via PowerShell: Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name fDenyTSConnections -Value 1.
+
+16. Grabbing and Running Scripts
+Linux: Download the script using wget or curl, then run it with bash: bash <script-name>.
+Windows: You can run PowerShell or batch scripts. Make sure to set the execution policy if needed (Set-ExecutionPolicy RemoteSigned)
