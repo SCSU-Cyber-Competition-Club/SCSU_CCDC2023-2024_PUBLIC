@@ -4,8 +4,16 @@ sudo passwd username
 To change the root password:
 sudo passwd root
 
-****** THIS STEP NEEDS TO BE DONE LATER //Lock the Root Account ---> This will prevent anyone from logging in as root, while still allowing the use of sudo.
-sudo passwd -l root
+You can still use the root account to log in directly (if permitted by your system configuration) or switch to root using sudo -i or su - after entering the root password.
+
+Security Considerations:
+
+Ensure the root password is strong and secure.
+If you choose to keep the root account active, consider restricting root login via SSH by setting the following in /etc/ssh/sshd_config:
+PermitRootLogin no
+
+Then restart the SSH service:
+sudo systemctl restart sshd
 
 Allow Only Specific Users to Use sudo: Limit who can use sudo by editing the /etc/sudoers file. Always use visudo to avoid syntax errors.
 sudo visudo
