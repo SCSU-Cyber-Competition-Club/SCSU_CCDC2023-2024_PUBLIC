@@ -1,0 +1,140 @@
+1. Setting Up a DNS Server On Windows Server:
+
+Install the DNS Server Role:
+
+Open Server Manager.
+Navigate to Manage > Add Roles and Features.
+Select Role-based or feature-based installation.
+Choose the appropriate server.
+In the Roles list, select DNS Server.
+Proceed through the wizard and click Install.
+
+2. Configure DNS Zones:
+
+Open DNS Manager (found in Administrative Tools).
+Right-click on Forward Lookup Zones and select New Zone.
+Follow the wizard to create a Primary Zone, specifying the zone name (e.g., example.com).
+Repeat the process for Reverse Lookup Zones if needed.
+
+3. Add DNS Records:
+
+In DNS Manager, navigate to your newly created zone.
+Right-click in the right pane and select New Host (A or AAAA).
+Enter the Name and IP address for the host.
+Click Add Host.
+For mail servers, add MX records by right-clicking the zone and selecting New Mail Exchanger (MX).
+
+4. Configure Forwarders (Optional):
+
+In DNS Manager, right-click the server name and select Properties.
+Go to the Forwarders tab.
+Click Edit and add the IP addresses of external DNS servers to which queries should be forwarded.
+
+5. Test the Configuration:
+
+Use the nslookup command to verify DNS resolution.
+Ensure that clients can resolve domain names correctly.
+-----------------------------------------------------------
+-----------------------------------------------------------
+
+Setting DNS On Linux (Using BIND9):
+
+1. Install BIND9:
+
+Update your package list:
+sudo apt update
+
+Install BIND9:
+sudo apt install bind9
+
+2. Configure the DNS Server:
+
+Edit the BIND configuration file:
+
+sudo nano /etc/bind/named.conf.options
+Set the forwarders to external DNS servers:
+
+forwarders {
+    8.8.8.8;
+    8.8.4.4;
+};
+Save and exit the file.
+
+3. Create DNS Zones:
+
+Define the zone in the BIND configuration:
+
+sudo nano /etc/bind/named.conf.local
+Add the following:
+
+zone "CCDCcomp.com" {
+    type master;
+    file "/etc/bind/zones/db.CCDCcomp.com";
+};
+
+Create the zone file directory:
+sudo mkdir /etc/bind/zones
+
+Create the zone file:
+sudo nano /etc/bind/zones/db.CCDCcomp.com
+
+Add the zone information:
+
+;
+; BIND data file for example.com
+;
+$TTL    604800
+@       IN      SOA     ns1.CCDCcomp.com. admin.CCDCcomp.com. (
+                      3         ; Serial
+                 604800         ; Refresh
+                  86400         ; Retry
+                2419200         ; Expire
+                 604800 )       ; Negative Cache TTL
+;
+@       IN      NS      ns1.CCDCcomp.com.
+ns1     IN      A       192.168.1.1
+www     IN      A       192.168.1.2
+mail    IN      A       192.168.1.3
+@       IN      MX      10 mail.CCDCcomp.com.
+
+In nano or vim Save and exit the file.
+
+4. Restart BIND9:
+sudo systemctl restart bind9
+
+5. Test the Configuration:
+Use the dig command to verify DNS resolution:
+dig @localhost example.com
+Ensure that clients can resolve domain names correctly.
+-----------------------------------------------------------------------
+------------------------------------------------------------------------
+Identifying and Remediating Vulnerabilities to Kerberos-Based Attacks
+Identifying Vulnerable Accounts:
+
+1. Enumerate Service Principal Names (SPNs):
+
+Use PowerShell to list accounts with SPNs:
+Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName
+
+2. Analyze Account Privileges:
+Identify accounts with high privileges and SPNs, as they are prime targets for attacks like Kerberoasting.
+
+3. Monitor Kerberos Ticket Requests:
+
+Enable auditing for Kerberos service ticket requests.
+Analyze Event ID 4769 in the Security logs for unusual patterns or a high number of requests.
+--------------------------------
+--------------------------------
+Remediation Steps:
+1. Strengthen Service Account Passwords:
+
+Ensure service accounts have complex, high-entropy passwords to resist brute-force attacks.
+
+2. Implement Managed Service Accounts (MSAs):
+Use MSAs which automatically manage complex passwords and reduce administrative overhead.
+
+3. Limit Account Privileges:
+Apply the principle of least privilege, ensuring service accounts have only the necessary permissions.
+
+4. Regularly Rotate Service Account Credentials:
+Periodically update passwords for service accounts to mitigate the risk of compromised credentials.
