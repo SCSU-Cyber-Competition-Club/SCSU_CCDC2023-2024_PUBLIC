@@ -1,0 +1,239 @@
+Changing User Passwords ---> To manually change a user’s password:
+sudo passwd username
+
+To change the root password:
+sudo passwd root
+
+****** THIS STEP NEEDS TO BE DONE LATER //Lock the Root Account ---> This will prevent anyone from logging in as root, while still allowing the use of sudo.
+sudo passwd -l root
+
+Allow Only Specific Users to Use sudo: Limit who can use sudo by editing the /etc/sudoers file. Always use visudo to avoid syntax errors.
+sudo visudo
+
+# Add a line to allow specific users only (replace "username" with actual usernames):
+username ALL=(ALL) ALL
+
+# To allow specific commands, you can restrict it like this:
+username ALL=(ALL) /usr/bin/systemctl, /usr/bin/apt
+
+Require Password for sudo: Ensure that sudo requires a password each time to prevent unauthorized use.
+sudo nano /etc/sudoers
+
+# Remove or comment out the line that says "NOPASSWD" to ensure passwords are always required:
+# %sudo ALL=(ALL) NOPASSWD: ALL
+
+ Use sudo Instead of Logging in as Root ---> Encourage users to use sudo instead of logging in as root. sudo allows users to perform administrative tasks without giving them full root privileges.
+sudo visudo
+
+# Add the following to log all sudo commands:
+Defaults logfile="/var/log/sudo.log"
+
+Audit and Monitor User Activity ---> To track user actions, particularly those with root or sudo access, use audit logs.
+sudo apt install auditd audispd-plugins  # Ubuntu/Debian
+sudo yum install audit auditd-plugins    # CentOS/RHEL
+
+# Start and enable the audit service
+sudo systemctl enable auditd
+sudo systemctl start auditd
+
+You can then track commands run with sudo:
+sudo ausearch -m EXECVE -c sudo
+
+Update System ---> Keep your system up to date to close vulnerabilities.
+# Ubuntu/Debian
+sudo apt update && sudo apt upgrade -y
+
+# CentOS/RHEL
+sudo yum update -y
+
+Disable Unnecessary Services ---> Identify and disable services that are not needed.
+# List all services
+sudo systemctl list-unit-files --type=service
+
+# Disable unwanted services (e.g., Bluetooth)
+sudo systemctl disable bluetooth
+sudo systemctl stop bluetooth
+
+# Mask a service so it can't be started (e.g., Telnet)
+sudo systemctl mask telnet
+
+Configure Firewall (UFW for Ubuntu/Debian, Firewalld for CentOS) ---> Limit incoming and outgoing traffic by controlling firewall rules.
+# Ubuntu/Debian (UFW)
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw deny 23 # Disable Telnet
+sudo ufw status verbose
+
+# CentOS/RHEL (Firewalld)
+sudo systemctl start firewalld
+sudo firewall-cmd --add-service=ssh --permanent
+sudo firewall-cmd --remove-service=telnet --permanent
+sudo firewall-cmd --reload
+
+Disable Root Login via SSH ---> Prevent root from logging in directly via SSH.
+# Edit SSH configuration file
+sudo nano /etc/ssh/sshd_config
+
+# Disable root login (set to "no")
+PermitRootLogin no
+
+# Restart SSH service
+sudo systemctl restart sshd
+
+Disable Unused Network Services ---> Check for services that listen on network ports and disable those that are unnecessary.
+# Check for services listening on ports
+sudo ss -tuln
+
+# Disable services you don't need (e.g., FTP)
+sudo systemctl disable vsftpd
+sudo systemctl stop vsftpd
+
+Enforce Strong Password Policies ---> Configure /etc/security/pwquality.conf to enforce password complexity and strength.
+# Open the file for editing
+sudo nano /etc/security/pwquality.conf
+
+# Set password requirements (example settings):
+minlen = 12        # Minimum password length
+minclass = 3       # Require at least three character types (uppercase, lowercase, digits, symbols)
+retry = 3          # Maximum retries for setting a password
+
+Remove Unnecessary Packages --- > Remove software you don't need to reduce the attack surface.
+# List installed packages
+dpkg --list  # Debian/Ubuntu
+rpm -qa      # CentOS/RHEL
+
+# Remove unnecessary packages
+sudo apt remove package-name  # Debian/Ubuntu
+sudo yum remove package-name  # CentOS/RHEL
+
+Restrict User Permissions (Least Privilege) --- > Use usermod to restrict users from unnecessary privileges.
+# Add user to a restricted group (remove from sudo or admin privileges)
+sudo usermod -L username  # Lock user account
+sudo usermod -aG restricted-group username
+
+Enable Automatic Updates --- > Ensure that security updates are automatically applied.
+# Ubuntu/Debian
+sudo apt install unattended-upgrades
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+
+# CentOS/RHEL
+sudo yum install yum-cron
+sudo systemctl enable yum-cron
+sudo systemctl start yum-cron
+
+Disable IPv6 (if not needed) ---> If your system doesn’t require IPv6, disable it to minimize attack surface.
+# Edit sysctl configuration
+sudo nano /etc/sysctl.conf
+
+# Add the following lines to disable IPv6
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+
+# Apply changes
+sudo sysctl -p
+
+Set Up Logging and Auditing --- > Enable audit logging to track suspicious activity.
+# Install audit tools
+sudo apt install auditd audispd-plugins  # Ubuntu/Debian
+sudo yum install audit audispd-plugins   # CentOS/RHEL
+
+# Start audit service
+sudo systemctl enable auditd
+sudo systemctl start auditd
+
+# Check logs
+sudo ausearch -m avc
+
+Secure SSH Configurations --- > Harden SSH with key-based authentication and disabling root login.
+# Disable password-based login
+sudo nano /etc/ssh/sshd_config
+
+# Add/modify the following settings
+PasswordAuthentication no
+PermitRootLogin no
+AllowUsers your-username
+
+# Restart SSH service
+sudo systemctl restart sshd
+
+ File Integrity Monitoring (FIM) ---> Install tools like AIDE or Tripwire to monitor file integrity.
+# Install AIDE
+sudo apt install aide  # Ubuntu/Debian
+sudo yum install aide  # CentOS/RHEL
+
+# Initialize AIDE database
+sudo aideinit
+
+# Check file integrity
+sudo aide --check
+
+Remove Unused User Accounts ---> Remove or lock unnecessary user accounts to reduce the attack surface.
+# Lock user accounts
+sudo usermod -L username
+
+# Delete unused user accounts
+sudo userdel username
+
+Limit System Resource Usage ---> Set limits on resource usage to prevent denial-of-service attacks.
+# Edit system limits
+sudo nano /etc/security/limits.conf
+
+# Example resource limits for users
+* hard nproc 100
+* hard nofile 10000
+
+-------------------------------------------------
+UNNECESSARY PORTS TO CLOSE 
+Telnet (Port 23): Highly insecure because data is transmitted in plaintext. Close it if you don't need it.
+sudo ufw deny 23  # Ubuntu/Debian
+sudo firewall-cmd --remove-service=telnet --permanent  # CentOS/RHEL
+sudo firewall-cmd --reload
+
+FTP (Port 21): Often exploited, especially if not secured properly. Use SFTP instead.
+sudo ufw deny 21
+sudo firewall-cmd --remove-service=ftp --permanent
+sudo firewall-cmd --reload
+
+SMTP (Port 25): Vulnerable to spamming and attacks if not configured securely. Only open if it's used for email.
+sudo ufw deny 25
+sudo firewall-cmd --remove-service=smtp --permanent
+sudo firewall-cmd --reload
+
+DNS (Port 53): If your server is not running as a DNS server, close this port.
+sudo ufw deny 53
+sudo firewall-cmd --remove-service=dns --permanent
+sudo firewall-cmd --reload
+
+NetBIOS (Ports 137-139): Used for file sharing in Windows networks, but often targeted for exploitation.
+sudo ufw deny 137
+sudo ufw deny 138
+sudo ufw deny 139
+sudo firewall-cmd --remove-service=samba --permanent
+sudo firewall-cmd --reload
+
+SMB (Port 445): Used for Windows file sharing and is commonly attacked, particularly with ransomware.
+sudo ufw deny 445
+sudo firewall-cmd --remove-service=samba --permanent
+sudo firewall-cmd --reload
+
+RDP (Port 3389): Remote Desktop Protocol is a common target for brute-force attacks. Close if not used.
+sudo ufw deny 3389
+sudo firewall-cmd --remove-service=rdp --permanent
+sudo firewall-cmd --reload
+
+SNMP (Port 161): Exploited for network management. Close it if not required.
+sudo ufw deny 161
+sudo firewall-cmd --remove-service=snmp --permanent
+sudo firewall-cmd --reload
+
+NFS (Port 2049): Commonly used for file sharing but can expose sensitive data if not secured.
+sudo ufw deny 2049
+sudo firewall-cmd --remove-service=nfs --permanent
+sudo firewall-cmd --reload
+
+HTTP (Port 80) and HTTPS (Port 443): These should only be open if you are running a web server. Attackers target web servers for vulnerabilities.
+sudo ufw deny 80   # HTTP
+sudo ufw deny 443  # HTTPS
+sudo firewall-cmd --remove-service=http --permanent
+sudo firewall-cmd --remove-service=https --permanent
+sudo firewall-cmd --reload
