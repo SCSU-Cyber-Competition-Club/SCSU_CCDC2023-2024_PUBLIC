@@ -13,8 +13,8 @@ echo "Enabling CGI module..."
 a2enmod cgid
 
 # Backup the current Apache configuration file
-APACHE_CONF="/etc/apache2/apache2.conf"
-BACKUP_CONF="/etc/apache2/apache2.conf.bak"
+APACHE_CONF="/etc/httpd/httpd.conf"
+BACKUP_CONF="/etc/httpd/httpd.conf.bak"
 
 if [[ ! -f $BACKUP_CONF ]]; then
     echo "Backing up Apache configuration to $BACKUP_CONF..."
@@ -90,7 +90,7 @@ fi
 
 # Restart Apache to apply changes
 echo "Restarting Apache server to apply changes..."
-systemctl restart apache2
+systemctl restart httpd
 
 echo "Secure CGI configuration completed successfully!"
 echo "Test your CGI script by visiting http://your-server-ip/cgi-bin/example-bash.sh"
