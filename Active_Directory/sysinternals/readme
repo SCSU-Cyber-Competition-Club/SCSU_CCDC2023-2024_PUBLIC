@@ -1,2 +1,6 @@
 AutoRuns has cofunctionality with Process Explorer. To utilize, ensure both programs are downloaded to the same folder in your system.
 64 vs 64a are different versions that can run on different systems, dependent on your processor. Given that you'll be using CCDC's laptops and not your own, downloading both is recommended.
+
+AutoRuns helps in monitoring persistence, monitoring areas where malware could potentially run after the system boots.
+Process Explorer is a better alternative to monitoring and killing suspicous processes than Task Manager.
+TCPView is effectively a cleaner, GUI alternative to netstat, monitoring connections and associated processes/executables.
