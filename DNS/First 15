@@ -58,10 +58,6 @@ Disable Unnecessary Services ---> Identify and disable services that are not nee
 # List all services
 sudo systemctl list-unit-files --type=service
 
-# Disable unwanted services (e.g., Bluetooth)
-sudo systemctl disable bluetooth
-sudo systemctl stop bluetooth
-
 # Mask a service so it can't be started (e.g., Telnet)
 sudo systemctl mask telnet
 
@@ -77,13 +73,6 @@ sudo systemctl start firewalld
 sudo firewall-cmd --add-service=ssh --permanent
 sudo firewall-cmd --remove-service=telnet --permanent
 sudo firewall-cmd --reload
-
-Disable Root Login via SSH ---> Prevent root from logging in directly via SSH.
-# Edit SSH configuration file
-sudo nano /etc/ssh/sshd_config
-
-# Disable root login (set to "no")
-PermitRootLogin no
 
 # Restart SSH service
 sudo systemctl restart sshd
@@ -124,21 +113,6 @@ Enable Automatic Updates --- > Ensure that security updates are automatically ap
 sudo apt install unattended-upgrades
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
-# CentOS/RHEL
-sudo yum install yum-cron
-sudo systemctl enable yum-cron
-sudo systemctl start yum-cron
-
-Disable IPv6 (if not needed) ---> If your system doesn’t require IPv6, disable it to minimize attack surface.
-# Edit sysctl configuration
-sudo nano /etc/sysctl.conf
-
-# Add the following lines to disable IPv6
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
-
-# Apply changes
-sudo sysctl -p
 
 Set Up Logging and Auditing --- > Enable audit logging to track suspicious activity.
 # Install audit tools
@@ -151,18 +125,6 @@ sudo systemctl start auditd
 
 # Check logs
 sudo ausearch -m avc
-
-Secure SSH Configurations --- > Harden SSH with key-based authentication and disabling root login.
-# Disable password-based login
-sudo nano /etc/ssh/sshd_config
-
-# Add/modify the following settings
-PasswordAuthentication no
-PermitRootLogin no
-AllowUsers your-username
-
-# Restart SSH service
-sudo systemctl restart sshd
 
  File Integrity Monitoring (FIM) ---> Install tools like AIDE or Tripwire to monitor file integrity.
 # Install AIDE
