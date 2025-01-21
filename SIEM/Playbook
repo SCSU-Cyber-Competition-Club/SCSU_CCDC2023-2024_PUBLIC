@@ -8,7 +8,8 @@ Go to:  cd /opt/splunk/bin
 ./splunk edit user admin -password <NewPassword> -auth admin:<OldPassword>
 
 2. Update the system and upgrade
-      - sudo apt update && sudo apt upgrade -y
+      - yum apt update -y
+      - yum apt upgrade -y
 
 3. Harden Splunk Configurations
       - Enable SSL for Splunk Web:  Edit
@@ -62,23 +63,20 @@ enableSplunkWebSSL = true
      Save and submit.
 
 11. Port that needs to be Open 
-port
-Why it’s needed
-8000
-To log in and use Splunk’s web interface
-8089
-To manage Splunk and connect its components.
-9997
-To get logs from forwarders to the main server.
-8088
-To collect logs from apps or systems via HTTP.
-8191
-To store app data inside Splunk.
-514
-To collect logs from devices like firewalls.
-8080
-To connect multiple search servers together.
-
+      a. port 8000
+            used to log in and access Splunk's web interface.
+      b. Port 8089
+            Required to manage Splunk and connect its internal components.
+      c. Port 9997
+            Used for receiving logs from forwarders to the main Splunk server. 
+       d. Port 8088
+            Enables collecting logs from apps or systes via HTTP Event Collector (HEC).
+      e. Port 8191
+            Handles storage of app related data inside Splunk
+      f. Port 514
+            Collects logs from devices like firewalls through the syslog protocol.
+      g. Port 8080            
+            used to connect and manage multiple search servers in a distributed environment.
 
 12. Turn on Extra Logging
 From the Web Interface:
