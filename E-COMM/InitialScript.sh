@@ -72,6 +72,7 @@ ip a | grep inet6
 chkconfig sshd off
 service sshd stop
 yum remove ssh
+yum remove telnet
 yum remove openssh-server
 yum remove cockpit
 
