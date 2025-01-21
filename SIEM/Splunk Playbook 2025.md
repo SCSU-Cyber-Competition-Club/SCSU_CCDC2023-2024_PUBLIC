@@ -63,28 +63,35 @@ enableSplunkWebSSL = true
      Save and submit.
 
 11. Port that needs to be Open 
-      a. port 8000
+
+    a. port 8000
             used to log in and access Splunk's web interface.
-      b. Port 8089
+
+    b. Port 8089
             Required to manage Splunk and connect its internal components.
-      c. Port 9997
+
+    c. Port 9997
             Used for receiving logs from forwarders to the main Splunk server. 
-       d. Port 8088
+
+    d. Port 8088
             Enables collecting logs from apps or systes via HTTP Event Collector (HEC).
-      e. Port 8191
+
+    e. Port 8191
             Handles storage of app related data inside Splunk
-      f. Port 514
+
+    f. Port 514
             Collects logs from devices like firewalls through the syslog protocol.
-      g. Port 8080            
+
+    g. Port 8080            
             used to connect and manage multiple search servers in a distributed environment.
 
-12. Turn on Extra Logging
+13. Turn on Extra Logging
 From the Web Interface:
      - Go to Settings > Server settings > Logging, find the component, set to DEBUG or INFO, and save.
 From the Command Line:
      - Splunk set log-level <component_name> -level DEBUG
 
-13. Lock and Unlock root account no/login
+14. Lock and Unlock root account no/login
 LOCK:
      - cd /opt/splunk/bin
      - sudo ./splunk edit user admin -lock true
@@ -92,7 +99,7 @@ Unlock:
      - cd /opt/splunk/bin
      - sudo ./spluk edit user admin -lock false
 
-14. Useful splunk Commands:
+15. Useful splunk Commands:
      - sudo ./splunk help search-commands
      - sudo ./splunk show servername
      - ./splunk list monitor
@@ -100,14 +107,14 @@ Unlock:
      - ./splunk list index
      - ./spluk list role
 
-15. Check Open ports:
+16. Check Open ports:
      - sudo netstat -tulnp
 
-16. Review user activities:
+17. Review user activities:
      - Last
      - lastlog       This shows the last login details for all users, whether local or remote
 
-17. Do Backups:
+18. Do Backups:
      - splunk stop
 To do the Next step, you need to be in the Home directory
      - cp -r <directory name> directoryname.backup      example: cp -r opt  opt.backup
@@ -115,13 +122,13 @@ To do the Next step, you need to be in the Home directory
 Example: cp -r outputs.conf   outputs.confBackup
      - splunk start
 
-18. Splunk Forward Commands:
+19. Splunk Forward Commands:
      - ./splunk add forward-server <ip address>
 Example: ./splunk add forward-server 172.20.241.20:9997
      - sudo ./splunk restart
      - ./splunk enable boot-start
 
-19. Change Minimum Free Space for Logs
+20. Change Minimum Free Space for Logs
  Edit the server.conf file:
      - sudo nano /opt/splunk/etc/system/local/server.conf
 Update or add the following to ensure there is enough disk space for splunk ot log properly:
