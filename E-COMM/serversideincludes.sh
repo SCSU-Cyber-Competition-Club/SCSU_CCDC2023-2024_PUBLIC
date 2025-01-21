@@ -1,37 +1,32 @@
 #!/bin/bash
 
-echo "Starting Secure SSI configuration..."
+# Define variables
+HTTPD_CONF="/etc/httpd/conf/httpd.conf"
 
-# Enable SSI module
-echo "Enabling Includes in Apache configuration..."
-sudo a2enmod include
+# Write configuration to httpd.conf
+cat <<EOF > $HTTPD_CONF
+# Global server configuration
+<Directory />
+  Order Deny,Allow
+  Deny from all
+  Options None
+  AllowOverride None
+</Directory>
 
-# Restrict SSI to specific directories and disable 'exec'
-echo "Configuring secure SSI in Apache..."
-cat <<EOF | sudo tee /etc/httpd/conf-available/secure-ssi.conf
-<Directory /var/www/html/secure-ssi>
-    Options +IncludesNOEXEC
-    AllowOverride None
-    Require all granted
+<Directory /web>
+  Order Allow,Deny
+  Allow from all
+  Options -Includes
+  AllowOverride None
 </Directory>
 EOF
 
-sudo a2enconf secure-ssi
-
-# Disable directory indexing
-echo "Disabling directory indexing..."
-sudo sed -i '/<Directory \/>/,/<\/Directory>/ s/Options .*/Options -Indexes/' /etc/httpd/httpd.conf
-
-# Enable HTTPS if not already enabled
-echo "Ensuring HTTPS is enabled..."
-sudo a2enmod ssl
-sudo a2ensite default-ssl
-
 # Restart Apache to apply changes
-echo "Restarting Apache to apply changes..."
-sudo systemctl restart httpd || {
-    echo "Error restarting Apache. Check 'systemctl status httpd' and 'journalctl -xe' for details."
-    exit 1
-}
+systemctl restart httpd
 
-echo "Secure SSI configuration completed successfully!"
+# Status check
+if systemctl is-active --quiet httpd; then
+  echo "Apache restarted successfully with SSI turned off."
+else
+  echo "Apache failed to restart. Check the configuration for errors."
+fi
