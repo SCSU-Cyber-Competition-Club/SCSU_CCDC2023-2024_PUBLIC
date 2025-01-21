@@ -1,1 +1,1 @@
-﻿Set-ADDomain -Identity "DomainName" -LDAPSigning Required
+﻿Set-ADDomain -Identity "dc=allsafe,dc=com" -LDAPSigning Required
