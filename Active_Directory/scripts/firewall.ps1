@@ -28,8 +28,8 @@ New-NetFirewallRule -DisplayName "Allow KerberosTCP Inbound"  -Direction Inbound
 New-NetFirewallRule -DisplayName "Allow KerberosUDP Outbound"  -Direction Outbound  -Protocol UDP  -LocalPort 88  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "krb5"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow KerberosUDP Inbound"  -Direction Inbound  -Protocol UDP  -LocalPort 88  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "krb5"  -Profile Any
 
-New-NetFirewallRule -DisplayName "Allow RPC Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 135  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "rpcss"  -Profile Any
-New-NetFirewallRule -DisplayName "Allow RPC Inbound"  -Direction Inbound  -Protocol TCP  -LocalPort 135  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "rpcss"  -Profile Any
+New-NetFirewallRule -DisplayName "Allow RPC/WMI Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 135  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "rpcss"  -Profile Any
+New-NetFirewallRule -DisplayName "Allow RPC/WMI Inbound"  -Direction Inbound  -Protocol TCP  -LocalPort 135  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "rpcss,winmgmt"  -Profile Any
 
 New-NetFirewallRule -DisplayName "Allow KerbPass Outbound"  -Direction Outbound  -Protocol Any  -LocalPort 464  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "kpasswd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow KerbPass Inbound"  -Direction Inbound  -Protocol Any  -LocalPort 464  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "kpasswd"  -Profile Any
@@ -43,7 +43,9 @@ New-NetFirewallRule -DisplayName "Allow LDAP Inbound"  -Direction Inbound  -Prot
 #Realized at this point you can make one rule for both inbound and outbound with -Direction Both. Not taking the time to clean up the code above, even though I'm taking the time to write this comment. Deal with it.
 
 
-New-NetFirewallRule -DisplayName "Block WinRM and WMI"  -Direction Both  -Protocol Any -Action Block  -Service "winrm"  -Profile Any
+New-NetFirewallRule -DisplayName "Block WinRM"  -Direction Both  -Protocol Any -Action Block  -Service "winrm"  -Profile Any
+New-NetFirewallRule -DisplayName "Block WMI"  -Direction Both  -Protocol Any -Action Block  -Service "winmgmt"  -Profile Any
+New-NetFirewallRule -DisplayName "Block RPC"  -Direction Both  -Protocol Any -Action Block  -Service "rpcss"  -Profile Any
 
 New-NetFirewallRule -DisplayName "Block SMB"  -Direction Both  -Protocol Any -Action Block  -Service "LanManServer"  -Profile Any
 New-NetFirewallRule -DisplayName "Block Telnet"  -Direction Both  -Protocol Any -Action Block  -Service "Tlntsvr"  -Profile Any
