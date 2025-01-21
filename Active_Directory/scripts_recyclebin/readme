@@ -1,0 +1,7 @@
+SPNumerate was an overly complex script with a dirty output. Furthermore, this can be done precomp with access to the environment.
+
+Account_cull was arguably more tedious than the manual process, and more importantly, there's no accounts that should be deleted. (Scoring users are, well, for scoring.)
+
+Checklist, a similar script changing passwords, was also tedious; furthermore, there are MANY user scoring accounts, and password changes for these MUST be communicated to judges. A script to change these passwords to a predetermined password list that you will pass on to the judges is more appropriate.
+
+Delegation attempted to disable delegation entirely for users and computers. After seeing the environment, no users are trusted anyhow; furthermore, the domain controller (computer) needs to have restricted Kerberos delegation.
