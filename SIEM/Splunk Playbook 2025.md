@@ -1,41 +1,45 @@
 1. Changing All Passwords
-      a. Root password
+
+   a. Root password
             - passwd root
-      b.  User passwords
+
+   b.  User passwords
             - passwd sysadmin
-      c. Splunk Admin password   
+
+   c. Splunk Admin password   
+
 Go to:  cd /opt/splunk/bin
 ./splunk edit user admin -password <NewPassword> -auth admin:<OldPassword>
 
-2. Update the system and upgrade
+3. Update the system and upgrade
       - yum apt update -y
       - yum apt upgrade -y
 
-3. Harden Splunk Configurations
+4. Harden Splunk Configurations
       - Enable SSL for Splunk Web:  Edit
 /opt/splunk/etc/system/local/server.conf:
 [sslConfig]
 enableSplunkWebSSL = true
 
-4. Restart Splunk:
+5. Restart Splunk:
      - ./splunk restart
  
-5. Allow Splunk Ports:
+6. Allow Splunk Ports:
      - sudo ufw allow 8000/tcp
      - sudo ufw allow 8089/tcp
      - sudo ufw allow 9997/tcp
      - sudo ufw enable
 
-6. Block unused ports:
+7. Block unused ports:
      - sudo ufw deny <port>
 
-7. Harden SSH:  Edit /etc/ssh/sshd_config:
+8. Harden SSH:  Edit /etc/ssh/sshd_config:
      - PermitRootLogin no
      - PasswordAuthentication no
      - AllowUsers <specific-user>
  Restart SSH:   sudo systemctl restart sshd
 
-8. What to do when Splunk GUI is down?
+9. What to do when Splunk GUI is down?
      a. Edit the configuration File
           - nano $SPLUNK_HOME/etc/system/local/web.conf
      b. Update the web.conf  file
@@ -46,12 +50,12 @@ enableSplunkWebSSL = true
      d. Check if you can access the Splunk GUI
           - http://<hostname or your ip>:8080
 
- 9. Configure Indexer:
+ 10. Configure Indexer:
      - Setting Tab → Data → Forwarding and Receiving
      - Receive Data → Configure Receiving → Add New
      -  Select a receiving port port 9997 	
 
-10. Configure Splunk to Accept Logs
+11. Configure Splunk to Accept Logs
      a. Log into Splunk Web Interface:
           - http://<splunk-server-ip>:8000
      b. Go to:
@@ -62,7 +66,7 @@ enableSplunkWebSSL = true
           - Choose IP and enter your mahine’s Ip.
      Save and submit.
 
-11. Port that needs to be Open 
+12. Port that needs to be Open 
 
     a. port 8000
             used to log in and access Splunk's web interface.
