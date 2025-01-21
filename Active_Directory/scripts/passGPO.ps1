@@ -12,3 +12,7 @@ Write-Host "Lockout of administrator accounts enabled."
 
 Set-ADDefaultDomainPasswordPolicy -StorePasswordUsingReversibleEncryption $false
 Write-Host "Reversible encryption use for passwords disabled."
+
+# Ensure AES256 encryption is used for Kerberos.
+# THIS WILL ONLY FORCE AES256 IF NO OTHER VALUES ARE PRESENT HERE, which is the case in the 2025 comp.
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters" -Name "SupportedEncryptionTypes" -Value 0x8
