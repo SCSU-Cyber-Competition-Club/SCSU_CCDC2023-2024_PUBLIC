@@ -11,35 +11,35 @@
 Go to:  cd /opt/splunk/bin
 ./splunk edit user admin -password <NewPassword> -auth admin:<OldPassword>
 
-3. Update the system and upgrade
+2. Update the system and upgrade
       - yum apt update -y
       - yum apt upgrade -y
 
-4. Harden Splunk Configurations
+3. Harden Splunk Configurations
       - Enable SSL for Splunk Web:  Edit
 /opt/splunk/etc/system/local/server.conf:
 [sslConfig]
 enableSplunkWebSSL = true
 
-5. Restart Splunk:
+4. Restart Splunk:
      - ./splunk restart
  
-6. Allow Splunk Ports:
+5. Allow Splunk Ports:
      - sudo ufw allow 8000/tcp
      - sudo ufw allow 8089/tcp
      - sudo ufw allow 9997/tcp
      - sudo ufw enable
 
-7. Block unused ports:
+6. Block unused ports:
      - sudo ufw deny <port>
 
-8. Harden SSH:  Edit /etc/ssh/sshd_config:
+7. Harden SSH:  Edit /etc/ssh/sshd_config:
      - PermitRootLogin no
      - PasswordAuthentication no
      - AllowUsers <specific-user>
  Restart SSH:   sudo systemctl restart sshd
 
-9. What to do when Splunk GUI is down?
+8. What to do when Splunk GUI is down?
      a. Edit the configuration File
           - nano $SPLUNK_HOME/etc/system/local/web.conf
      b. Update the web.conf  file
@@ -50,12 +50,12 @@ enableSplunkWebSSL = true
      d. Check if you can access the Splunk GUI
           - http://<hostname or your ip>:8080
 
- 10. Configure Indexer:
+ 9. Configure Indexer:
      - Setting Tab → Data → Forwarding and Receiving
      - Receive Data → Configure Receiving → Add New
      -  Select a receiving port port 9997 	
 
-11. Configure Splunk to Accept Logs
+10. Configure Splunk to Accept Logs
      a. Log into Splunk Web Interface:
           - http://<splunk-server-ip>:8000
      b. Go to:
@@ -66,7 +66,7 @@ enableSplunkWebSSL = true
           - Choose IP and enter your mahine’s Ip.
      Save and submit.
 
-12. Port that needs to be Open 
+11. Port that needs to be Open 
 
     a. port 8000
             used to log in and access Splunk's web interface.
@@ -89,13 +89,13 @@ enableSplunkWebSSL = true
     g. Port 8080            
             used to connect and manage multiple search servers in a distributed environment.
 
-13. Turn on Extra Logging
+12. Turn on Extra Logging
 From the Web Interface:
      - Go to Settings > Server settings > Logging, find the component, set to DEBUG or INFO, and save.
 From the Command Line:
      - Splunk set log-level <component_name> -level DEBUG
 
-14. Lock and Unlock root account no/login
+13. Lock and Unlock root account no/login
 LOCK:
      - cd /opt/splunk/bin
      - sudo ./splunk edit user admin -lock true
@@ -103,7 +103,7 @@ Unlock:
      - cd /opt/splunk/bin
      - sudo ./spluk edit user admin -lock false
 
-15. Useful splunk Commands:
+14. Useful splunk Commands:
      - sudo ./splunk help search-commands
      - sudo ./splunk show servername
      - ./splunk list monitor
@@ -111,14 +111,14 @@ Unlock:
      - ./splunk list index
      - ./spluk list role
 
-16. Check Open ports:
+15. Check Open ports:
      - sudo netstat -tulnp
 
-17. Review user activities:
+16. Review user activities:
      - Last
      - lastlog       This shows the last login details for all users, whether local or remote
 
-18. Do Backups:
+17. Do Backups:
      - splunk stop
 To do the Next step, you need to be in the Home directory
      - cp -r <directory name> directoryname.backup      example: cp -r opt  opt.backup
@@ -126,18 +126,19 @@ To do the Next step, you need to be in the Home directory
 Example: cp -r outputs.conf   outputs.confBackup
      - splunk start
 
-19. Splunk Forward Commands:
+18. Splunk Forward Commands:
      - ./splunk add forward-server <ip address>
 Example: ./splunk add forward-server 172.20.241.20:9997
      - sudo ./splunk restart
      - ./splunk enable boot-start
 
-20. Change Minimum Free Space for Logs
+19. Change Minimum Free Space for Logs
  Edit the server.conf file:
      - sudo nano /opt/splunk/etc/system/local/server.conf
 Update or add the following to ensure there is enough disk space for splunk ot log properly:
 
      [diskUsage]
      minFreeSpace = 2000     <or above>
+  
   Then restart by running 
      - sudo ./splunk restart
