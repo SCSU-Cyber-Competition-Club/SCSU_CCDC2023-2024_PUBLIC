@@ -28,8 +28,3 @@ if apachectl configtest; then
     else
         echo "Apache failed to restart. Check the configuration for errors."
     fi
-else
-    echo "Configuration test failed. Restoring the previous configuration."
-    mv "${HTTPD_CONF}.bak" $HTTPD_CONF
-    systemctl restart httpd
-fi
