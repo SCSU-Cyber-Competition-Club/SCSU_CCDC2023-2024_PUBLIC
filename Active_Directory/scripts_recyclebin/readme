@@ -5,3 +5,5 @@ Account_cull was arguably more tedious than the manual process, and more importa
 Checklist, a similar script changing passwords, was also tedious; furthermore, there are MANY user scoring accounts, and password changes for these MUST be communicated to judges. A script to change these passwords to a predetermined password list that you will pass on to the judges is more appropriate.
 
 Delegation attempted to disable delegation entirely for users and computers. After seeing the environment, no users are trusted anyhow; furthermore, the domain controller (computer) needs to have restricted Kerberos delegation.
+
+Kerbsigning actually just makes your system only look for DCs with Kerberos auth. "Kerberos signing" is... not a thing. Verify your AI responses, y'all.
