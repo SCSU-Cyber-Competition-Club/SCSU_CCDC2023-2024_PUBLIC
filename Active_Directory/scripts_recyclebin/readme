@@ -7,3 +7,5 @@ Checklist, a similar script changing passwords, was also tedious; furthermore, t
 Delegation attempted to disable delegation entirely for users and computers. After seeing the environment, no users are trusted anyhow; furthermore, the domain controller (computer) needs to have restricted Kerberos delegation.
 
 Kerbsigning actually just makes your system only look for DCs with Kerberos auth. "Kerberos signing" is... not a thing. Verify your AI responses, y'all.
+
+SMB ensures the most recent version, SMBv3, is used. However, in the 2025 comp at least, we don't want/need SMB at all.
