@@ -12,8 +12,7 @@
 New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 
-New-NetFirewallRule -DisplayName "Allow SMB Outbound" -Direction Outbound  -Protocol TCP  -LocalPort 445  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "LanmanServer"  -Profile Any
-New-NetFirewallRule -DisplayName "Allow SMB Inbound" -Direction Inbound  -Protocol TCP  -LocalPort 445  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "LanmanServer"  -Profile Any
+
 
 New-NetFirewallRule -DisplayName "Allow SSHTCP Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 22  -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "sshd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow SSHTCP Inbound"  -Direction Inbound  -Protocol TCP  -LocalPort 22 -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150"  -Action Allow  -Service "sshd"  -Profile Any
@@ -47,7 +46,7 @@ New-NetFirewallRule -DisplayName "Block WinRM"  -Direction Both  -Protocol Any -
 New-NetFirewallRule -DisplayName "Block WMI"  -Direction Both  -Protocol Any -Action Block  -Service "winmgmt"  -Profile Any
 New-NetFirewallRule -DisplayName "Block RPC"  -Direction Both  -Protocol Any -Action Block  -Service "rpcss"  -Profile Any
 
-New-NetFirewallRule -DisplayName "Block SMB"  -Direction Both  -Protocol Any -Action Block  -Service "LanManServer"  -Profile Any
+
 New-NetFirewallRule -DisplayName "Block Telnet"  -Direction Both  -Protocol Any -Action Block  -Service "Tlntsvr"  -Profile Any
 
 
@@ -68,7 +67,7 @@ New-NetFirewallRule -DisplayName "Block LDAP"  -Direction Both  -Protocol Any -A
 
 New-NetFirewallRule -DisplayName "Block RDP"  -Direction Both  -Protocol Any -Action Block  -Service "TermService"  -Profile Any
 
-
+New-NetFirewallRule -DisplayName "Block SMB"  -Direction Both  -Protocol Any -Action Block  -Service "LanManServer"  -Profile Any
 New-NetFirewallRule -DisplayName "Block FTP"  -Direction Both  -Protocol Any -Action Block  -Service "ftpsvc"  -Profile Any
 
 
