@@ -151,4 +151,4 @@ Update or add the following to ensure there is enough disk space for splunk ot l
 
 21. run nmap on port 9090 Zeuz admin
 
-- understand what does that port do and think about if it should be open it or not
+-Understand what the port does and think about whether it should be open or not.
