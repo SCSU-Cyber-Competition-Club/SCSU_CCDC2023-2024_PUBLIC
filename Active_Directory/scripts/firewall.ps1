@@ -95,28 +95,29 @@ New-NetFirewallRule -DisplayName "Block SSDP"  -Direction Outbound  -Protocol An
 New-NetFirewallRule -DisplayName "Block SSDP"  -Direction Inbound  -Protocol Any -Action Block  -Service "ssdpsrv"  -Profile Any
 
 #Following rule blocks port 593, which is RPC over HTTPS (RPC is needed, but not this). We already have restrictions for RPC above, but can't hurt.
-New-NetFirewallRule -DisplayName "Block RPC thru HTTPS"  -Direction Outbound  -Protocol Any -Action Block  -LocalPort 593  -Profile Any
-New-NetFirewallRule -DisplayName "Block RPC thru HTTPS"  -Direction Inbound  -Protocol Any -Action Block  -LocalPort 593  -Profile Any
+New-NetFirewallRule -DisplayName "Block RPC thru HTTPS"  -Direction Outbound  -Protocol TCP -Action Block  -LocalPort 593  -Profile Any
+New-NetFirewallRule -DisplayName "Block RPC thru HTTPS"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 593  -Profile Any
 
 
+#Following rules aren't working. Not enough time to figure out right now, not a huge target anyhow. Commented.
 #The following rules aim at blocking VNC traffic. There is no single VNC service - many iterations exist. As such, these rules will use file paths
 #for the various executable versions of VNC, as well as blocking the common port. (Again, as attackers may maliciously alter their port used, only the local port is specified.)
-New-NetFirewallRule -Name "Block VNC Port" -DisplayName "Block Remote Desktop App (mstsc)" -LocalPort 5900 -Enabled True -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCTightServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnserver.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCTightViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnviewer.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCRealServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncserver.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCRealViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncviewer.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCUltraServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\winvnc.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCUltraViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\vncviewer.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCTigerServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncserver.exe" -Action Block -Direction Outbound
-New-NetFirewallRule -Name "Block VNCTigerViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncviewer.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNC Port" -DisplayName "Block Remote Desktop App (mstsc)" -LocalPort 5900 -Enabled True -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCTightServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnserver.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCTightViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnviewer.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCRealServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncserver.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCRealViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncviewer.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCUltraServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\winvnc.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCUltraViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\vncviewer.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCTigerServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncserver.exe" -Action Block -Direction Outbound
+#New-NetFirewallRule -Name "Block VNCTigerViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncviewer.exe" -Action Block -Direction Outbound
 
-New-NetFirewallRule -Name "Block VNC Port" -DisplayName "Block Remote Desktop App (mstsc)" -LocalPort 5900 -Enabled True -Action Block
-New-NetFirewallRule -Name "Block VNCTightServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnserver.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCTightViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnviewer.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCRealServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncserver.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCRealViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncviewer.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCUltraServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\winvnc.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCUltraViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\vncviewer.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCTigerServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncserver.exe" -Action Block -Direction Inbound
-New-NetFirewallRule -Name "Block VNCTigerViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncviewer.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNC Port" -DisplayName "Block Remote Desktop App (mstsc)" -LocalPort 5900 -Enabled True -Action Block
+#New-NetFirewallRule -Name "Block VNCTightServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnserver.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCTightViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TightVNC\tvnviewer.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCRealServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncserver.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCRealViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\RealVNC\vncviewer.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCUltraServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\winvnc.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCUltraViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\vncviewer.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCTigerServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncserver.exe" -Action Block -Direction Inbound
+#New-NetFirewallRule -Name "Block VNCTigerViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncviewer.exe" -Action Block -Direction Inbound
