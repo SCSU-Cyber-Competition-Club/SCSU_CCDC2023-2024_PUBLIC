@@ -7,23 +7,12 @@ HTTPD_CONF="/etc/httpd/conf/httpd.conf"
 echo "Backing up the current httpd.conf..."
 cp "$HTTPD_CONF" "${HTTPD_CONF}.backup.$(date +%F-%T)"
 
-# Overwrite the configuration with your settings
-cat <<EOF > "$HTTPD_CONF"
-# Global server configuration
-<Directory />
-    Require all denied
-    Options None
-    AllowOverride None
-</Directory>
+# Update only the <Directory /> and <Directory /web> sections
+echo "Updating <Directory /> and <Directory /web> sections..."
+sed -i '/<Directory \/>/,/<\/Directory>/c\<Directory />\n    Require all denied\n    Options None\n    AllowOverride None\n</Directory>' "$HTTPD_CONF"
+sed -i '/<Directory \/web>/,/<\/Directory>/c\<Directory /web>\n    Require all granted\n    Options -Includes\n    AllowOverride None\n</Directory>' "$HTTPD_CONF"
 
-<Directory /web>
-    Require all granted
-    Options -Includes
-    AllowOverride None
-</Directory>
-EOF
-
-# Test the new configuration
+# Test the updated configuration
 echo "Testing the Apache configuration..."
 if apachectl configtest; then
     echo "Configuration test passed."
@@ -32,7 +21,7 @@ if apachectl configtest; then
     echo "Restarting Apache..."
     systemctl restart httpd
     if systemctl is-active --quiet httpd; then
-        echo "Apache restarted successfully."
+        echo "Apache restarted successfully with the updated configuration."
     else
         echo "Apache failed to restart. Check the service status and logs for errors."
         systemctl status httpd
