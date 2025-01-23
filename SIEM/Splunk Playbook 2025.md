@@ -14,6 +14,12 @@ Go to:  cd /opt/splunk/bin
 2. Update the system and upgrade
       - yum apt update -y
       - yum apt upgrade -y
+      - sudo reboot
+
+3. disable the services that you are not using
+- systemctl -list-units --type=service --state=running
+- systemctl disable sshd.service --permanate
+
 
 3. Harden Splunk Configurations
       - Enable SSL for Splunk Web:  Edit
@@ -29,7 +35,7 @@ enableSplunkWebSSL = true
      - sudo ufw allow 8089/tcp
      - sudo ufw allow 9997/tcp
      - sudo ufw enable
-
+     - reload
 6. Block unused ports:
      - sudo ufw deny <port>
 
@@ -101,7 +107,7 @@ LOCK:
      - sudo ./splunk edit user admin -lock true
 Unlock:
      - cd /opt/splunk/bin
-     - sudo ./spluk edit user admin -lock false
+     - sudo ./spluk edit user admin -lock false                          <LOOK INTO THIS BEFORE DOING  IT
 
 14. Useful splunk Commands:
      - sudo ./splunk help search-commands
@@ -142,3 +148,5 @@ Update or add the following to ensure there is enough disk space for splunk ot l
   
   Then restart by running 
      - sudo ./splunk restart
+20. run nmap on port 9090 Zeuz admin
+- understand what does that port do
