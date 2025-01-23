@@ -148,5 +148,7 @@ Update or add the following to ensure there is enough disk space for splunk ot l
   
   Then restart by running 
      - sudo ./splunk restart
+
 20. run nmap on port 9090 Zeuz admin
+
 - understand what does that port do
