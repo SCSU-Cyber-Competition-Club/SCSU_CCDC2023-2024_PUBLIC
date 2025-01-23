@@ -9,8 +9,8 @@
 
 
 
-New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
-New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
+New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound -Protocol TCP -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
+New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound -Protocol TCP -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 
 
 
