@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Define variables
+# Define the path to the Apache configuration file
 HTTPD_CONF="/etc/httpd/conf/httpd.conf"
 
-# Write configuration to httpd.conf
+# Write new configuration directly to httpd.conf
 cat <<EOF > $HTTPD_CONF
 # Global server configuration
 <Directory />
@@ -19,7 +19,7 @@ cat <<EOF > $HTTPD_CONF
 </Directory>
 EOF
 
-# Test the configuration
+# Test the new configuration
 if apachectl configtest; then
     # Restart Apache to apply changes
     systemctl restart httpd
@@ -28,3 +28,6 @@ if apachectl configtest; then
     else
         echo "Apache failed to restart. Check the configuration for errors."
     fi
+else
+    echo "Configuration test failed. Apache was not restarted."
+fi
