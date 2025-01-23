@@ -1,7 +1,7 @@
 {
     "rules": [
         {
-            "users": ["OREZ\\DC01$", "NT AUTHORITY\\SYSTEM"],
+            "users": ["Allsafe\\ALLSAFEDC1$", "NT AUTHORITY\\SYSTEM"],
             "action": "allow",
             "audit": "off"
         },
