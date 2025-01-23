@@ -90,7 +90,8 @@ yum list installed > installed_packages.txt
 
 #Apache Hardening
 #need to add to this
-
+yum install mod_security
+yum install mod_ssl
 #Checking sudoers
 echo "Users in wheel group:"
 getent group wheel | cut -d: -f4 | tr ',' '\n'
