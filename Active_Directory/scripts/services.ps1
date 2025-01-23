@@ -22,8 +22,8 @@ Set-Service -Name "UmRdpService" -StartupType Disabled
 #Set-Service -Name "RpcSs" -StartupType Disabled
 
 #Compatability with legacy RPC; as such, disabling shouldn't cause any issues (like with disabling Rcpss)
-Stop-Service -Name "RpcLocator"
-Set-Service -Name "RpcLocator" -StartupType Disabled
+#Stop-Service -Name "RpcLocator"
+#Set-Service -Name "RpcLocator" -StartupType Disabled
 
 Stop-Service -Name "RemoteRegistry" -Force
 Set-Service -Name "RemoteRegistry" -StartupType Disabled
@@ -51,5 +51,5 @@ Stop-Service -Name "LanmanWorkstation" -Force
 Set-Service -Name "LanmanWorkstation" -StartupType Disabled
 
 #RA Connection Manager. This is hard to stop even with force for some reason...
-Stop-Service -Name "RasMan" -Force
-Set-Service -Name "RasMan" -StartupType Disabled
+#Stop-Service -Name "RasMan" -Force
+#Set-Service -Name "RasMan" -StartupType Disabled
