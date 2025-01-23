@@ -8,9 +8,9 @@
 #Please, for the love of god, don't do what I did here with the IPs. This file would be half the size if I used a variable for those remote IPs...
 
 
-#WinRM, WMI, RPC... confusion here on service names/what ports/etc. Particularly with port 135; Google says both RPC and WMI utilize this (probably one through the other, but ultimately, what's the fucking service???) Test; we may need to remove the -Service params from these...
-#New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
-#New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
+
+New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
+New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound ` -Protocol TCP ` -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 
 
 
