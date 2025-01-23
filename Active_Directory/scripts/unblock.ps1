@@ -1,3 +1,4 @@
+#Comp environment disallows running unsigned scripts. Good policy to have, but gotta work around it.
 unblock-file adminlockout.ps1
 unblock-file epa.ps1
 unblock-file firewall.ps1
