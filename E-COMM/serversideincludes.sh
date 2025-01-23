@@ -11,6 +11,7 @@ cp "$HTTPD_CONF" "${HTTPD_CONF}.backup.$(date +%F-%T)"
 echo "Updating <Directory /> and <Directory /web> sections..."
 sed -i '/<Directory \/>/,/<\/Directory>/c\<Directory />\n    Require all denied\n    Options None\n    AllowOverride None\n</Directory>' "$HTTPD_CONF"
 sed -i '/<Directory \/web>/,/<\/Directory>/c\<Directory /web>\n    Require all granted\n    Options -Includes\n    AllowOverride None\n</Directory>' "$HTTPD_CONF"
+echo "LoadModule mpm_event_module modules/mod_mpm_event.so" >> /etc/httpd/conf/httpd.conf
 
 # Test the updated configuration
 echo "Testing the Apache configuration..."
