@@ -14,7 +14,7 @@
 
 
 
-New-NetFirewallRule -DisplayName "Allow SSHTCP Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 22  -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.2-41.30,172.20.241.40,172.20.242.150  -Action Allow  -Service "sshd"  -Profile Any
+New-NetFirewallRule -DisplayName "Allow SSHTCP Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 22  -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150  -Action Allow  -Service "sshd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow SSHTCP Inbound"  -Direction Inbound  -Protocol TCP  -LocalPort 22 -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150 -Action Allow  -Service "sshd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow SSHUDP Outbound"  -Direction Outbound  -Protocol UDP  -LocalPort 22 -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150  -Action Allow  -Service "sshd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow SSHUDP Inbound"  -Direction Inbound  -Protocol UDP  -LocalPort 22 -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150  -Action Allow  -Service "sshd"  -Profile Any
