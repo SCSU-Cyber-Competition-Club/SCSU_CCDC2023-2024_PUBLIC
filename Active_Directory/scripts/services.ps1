@@ -45,3 +45,9 @@ Set-Service -Name "Spooler" -StartupType Disabled
 #simple service discovery protocol
 Stop-Service -Name "sspdsrv" -Force
 Set-Service -Name "ssdpsrv" -StartupType Disabled
+
+#SMB
+Stop-Service -Name "LanmanServer" -Force
+Set-Service -Name "LanmanServer" -StartupType Disabled
+Stop-Service -Name "LanmanWorkstation" -Force
+Set-Service -Name "LanmanWorkstation" -StartupType Disabled
