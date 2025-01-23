@@ -5,9 +5,7 @@
 Stop-Service -Name "RasAuto" -Force
 Set-Service -Name "RasAuto" -StartupType Disabled
 
-#RA Connection Manager
-Stop-Service -Name "RasMan" -Force
-Set-Service -Name "RasMan" -StartupType Disabled
+
 
 #RD Configuration AND RD Services
 #AKA, this is the actual RDP service
@@ -51,3 +49,7 @@ Stop-Service -Name "LanmanServer" -Force
 Set-Service -Name "LanmanServer" -StartupType Disabled
 Stop-Service -Name "LanmanWorkstation" -Force
 Set-Service -Name "LanmanWorkstation" -StartupType Disabled
+
+#RA Connection Manager. This is hard to stop even with force for some reason...
+Stop-Service -Name "RasMan" -Force
+Set-Service -Name "RasMan" -StartupType Disabled
