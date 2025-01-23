@@ -1,6 +1,6 @@
 ﻿Get-NetAdapter
 $response = Read-Host "Which of the above interfaces will be be disabling NBT-NS for?"
-Set-NetIPInterface -InterfaceAlias "$response" -NetBios Disabled
+Set-NetIPInterface -InterfaceAlias "$response" -NetBIOS Disabled
 Write-Host "NBT-NS disabled for the $response interface."
 
 Set-GPRegistryValue -Name "DisableLLMNR" -Key "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -ValueName "EnableMulticast" -Value 0 -Type DWord
