@@ -40,10 +40,6 @@ Set-Service -Name "RemoteAccess" -StartupType Disabled
 Stop-Service -Name "Spooler"
 Set-Service -Name "Spooler" -StartupType Disabled
 
-#simple service discovery protocol
-Stop-Service -Name "sspdsrv" -Force
-Set-Service -Name "ssdpsrv" -StartupType Disabled
-
 #SMB
 Stop-Service -Name "LanmanServer" -Force
 Set-Service -Name "LanmanServer" -StartupType Disabled
