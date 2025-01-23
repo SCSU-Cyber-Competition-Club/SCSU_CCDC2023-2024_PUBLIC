@@ -12,9 +12,6 @@ Ensure the root password is strong and secure.
 If you choose to keep the root account active, consider restricting root login via SSH by setting the following in /etc/ssh/sshd_config:
 PermitRootLogin no
 
-Then restart the SSH service:
-sudo systemctl restart sshd
-
 Allow Only Specific Users to Use sudo: Limit who can use sudo by editing the /etc/sudoers file. Always use visudo to avoid syntax errors.
 sudo visudo
 
@@ -88,11 +85,6 @@ sudo systemctl stop vsftpd
 Enforce Strong Password Policies ---> Configure /etc/security/pwquality.conf to enforce password complexity and strength.
 # Open the file for editing
 sudo nano /etc/security/pwquality.conf
-
-# Set password requirements (example settings):
-minlen = 12        # Minimum password length
-minclass = 3       # Require at least three character types (uppercase, lowercase, digits, symbols)
-retry = 3          # Maximum retries for setting a password
 
 Remove Unnecessary Packages --- > Remove software you don't need to reduce the attack surface.
 # List installed packages
