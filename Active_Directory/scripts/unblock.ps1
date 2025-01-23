@@ -4,6 +4,7 @@ unblock-file epa.ps1
 unblock-file firewall.ps1
 unblock-file krbt.ps1
 unblock-file ldap.ps1
+unblock-file pass.ps1
 unblock-file preauth.ps1
 unblock-file services.ps1
 unblock-file smb.ps1
