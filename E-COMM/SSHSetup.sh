@@ -40,7 +40,7 @@ read -p $'\nPress [Enter] to continue to Fail2Ban setup...'
 
 # Install and Configure Fail2Ban
 echo -e "\nSetting up Fail2Ban..."
-if ! rpm -q fail2ban > /dev/null; then
+if ! yum list installed fail2ban &>/dev/null; then
     echo "Installing Fail2Ban and dependencies..."
     yum install -y epel-release
     yum install -y fail2ban fail2ban-systemd
