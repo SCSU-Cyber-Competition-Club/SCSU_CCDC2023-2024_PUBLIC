@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#Only needs to be executed if we need to enable SSH
+
+firewall-cmd --zone=public --add-service=ssh --permanent
+
+
+yum install ssh
+systemctl enable ssh
+
+
 echo "=== SSH Security Audit ==="
 echo "Press [Enter] to begin the audit..."
 read -p ""
