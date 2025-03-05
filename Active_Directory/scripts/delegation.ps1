@@ -1,9 +1,9 @@
 Write-Host "Enumerating for trusted delegation..." -ForeGroundColor Red
 
 $accounts = Get-ADUser -Filter {TrustedForDelegation -eq $true}
-Write-Host "'nUSERS WITH DELEGATION TRUST ENABLED: $accounts"
+Write-Host "USERS WITH DELEGATION TRUST ENABLED: $accounts"
 
-$computers = Get-ADUser -Filter {TrustedForDelegation -eq $true}
-Write-Host "'nCOMPUTERS WITH DELEGATION TRUST ENABLED:
+$computers = Get-ADComputer -Filter {TrustedForDelegation -eq $true}
+Write-Host "COMPUTERS WITH DELEGATION TRUST ENABLED: $computers"
 
 Write-Host "Delunumeration complete." -ForeGroundColor Red
