@@ -1,4 +1,4 @@
-Write-Host "Enumerating for trusted delegation..."
+Write-Host "Enumerating for trusted delegation..." -ForeGroundColor Red
 
 $accounts = Get-ADUser -Filter {TrustedForDelegation -eq $true}
 Write-Host "'nUSERS WITH DELEGATION TRUST ENABLED: $accounts"
