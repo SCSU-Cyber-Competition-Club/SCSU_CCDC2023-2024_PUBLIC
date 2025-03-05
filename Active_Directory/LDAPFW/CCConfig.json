@@ -1,0 +1,9 @@
+{
+    "rules": [
+	 {
+            "users": ["AD\\Administrator", "AD\\DC1$", "NT AUTHORITY\\SYSTEM"],
+            "action": "allow",
+            "audit": "off"
+        },
+    ]
+}
