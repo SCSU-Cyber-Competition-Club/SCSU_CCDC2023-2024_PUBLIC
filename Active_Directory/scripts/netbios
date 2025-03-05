@@ -9,3 +9,4 @@ foreach($interface in $interfaces) {
 }
 
 Write-Host "NetBIOS disabled." -ForeGroundColor Red
+Write-Host "Remember, you must restart the computer for this change to take effect!" -ForeGroundColor Red
