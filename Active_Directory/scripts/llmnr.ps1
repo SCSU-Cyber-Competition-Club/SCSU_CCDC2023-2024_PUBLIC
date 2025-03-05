@@ -1,6 +1,5 @@
 Write-Host "Disabling LLMNR..." -ForeGroundColor Red
 
-Set-GPRegistryValue -Name "DisableLLMNR" -Key "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -ValueName "EnableMulticast" -Value 0 -Type DWord
-Write-Host "LLMNR disabled. Vaccination complete."
 
+Set-ItemProperty -Path "HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient" -Name "NetbiosOptions" -Value 0 -Type Dword
 Write-Host "LLMNR disabled." -ForeGroundColor Red
