@@ -5,7 +5,7 @@
 #installing dependencies
 yum install git -y
 yum install python3 -y
-pip3 install ansi2html -y
+pip3 install ansi2html
 
 
 #add ansi2html to the PATH
