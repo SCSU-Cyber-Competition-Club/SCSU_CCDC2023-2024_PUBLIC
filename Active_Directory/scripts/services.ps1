@@ -41,10 +41,10 @@ Stop-Service -Name "Spooler"
 Set-Service -Name "Spooler" -StartupType Disabled
 
 #SMB
-Stop-Service -Name "LanmanServer" -Force
-Set-Service -Name "LanmanServer" -StartupType Disabled
-Stop-Service -Name "LanmanWorkstation" -Force
-Set-Service -Name "LanmanWorkstation" -StartupType Disabled
+#Stop-Service -Name "LanmanServer" -Force
+#Set-Service -Name "LanmanServer" -StartupType Disabled
+#Stop-Service -Name "LanmanWorkstation" -Force
+#Set-Service -Name "LanmanWorkstation" -StartupType Disabled
 
 #RA Connection Manager. This is hard to stop even with force for some reason...
 #Stop-Service -Name "RasMan" -Force
