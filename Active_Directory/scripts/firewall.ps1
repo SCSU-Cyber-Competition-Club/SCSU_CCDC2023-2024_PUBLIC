@@ -12,7 +12,7 @@
 #New-NetFirewallRule -DisplayName "Allow WinRM Outbound" -Direction Inbound -Protocol TCP -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 #New-NetFirewallRule -DisplayName "Allow WinRM Inbound" -Direction Inbound -Protocol TCP -LocalPort 5895,5896 ` -RemoteAddress "172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150" -Action Allow -Service "winrm" ` -Profile Any
 
-
+Write-Host "Building firewall..." -ForeGroundColor Red
 
 New-NetFirewallRule -DisplayName "Allow SSHTCP Outbound"  -Direction Outbound  -Protocol TCP  -LocalPort 22  -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150  -Action Allow  -Service "sshd"  -Profile Any
 New-NetFirewallRule -DisplayName "Allow SSHTCP Inbound"  -Direction Inbound  -Protocol TCP  -LocalPort 22 -RemoteAddress 172.20.240.10,172.20.240.20,172.20.242.10,172.20.242.200,172.20.241.20,172.20.241.30,172.20.241.40,172.20.242.150 -Action Allow  -Service "sshd"  -Profile Any
@@ -121,3 +121,6 @@ New-NetFirewallRule -DisplayName "Block RPC thru HTTPS"  -Direction Inbound  -Pr
 #New-NetFirewallRule -Name "Block VNCUltraViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\UltraVNC\vncviewer.exe" -Action Block -Direction Inbound
 #New-NetFirewallRule -Name "Block VNCTigerServer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncserver.exe" -Action Block -Direction Inbound
 #New-NetFirewallRule -Name "Block VNCTigerViewer" -DisplayName "Block Remote Desktop App (mstsc)" -Enabled True -Program "C:\Program Files\TigerVNC\vncviewer.exe" -Action Block -Direction Inbound
+
+Write-Host "Firewall built." -ForeGroundColor Red
+Write-Host "Don't forget to make sure the firewall is turned on!" -ForeGroundColor Green
