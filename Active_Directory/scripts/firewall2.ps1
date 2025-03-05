@@ -17,17 +17,31 @@ New-NetFirewallRule -DisplayName "Block SSDP"  -Direction Inbound  -Protocol Any
 
 
 
-New-NetFirewallRule -DisplayName "Block 135 (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 135 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 135 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 135 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 137 (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 137 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 137 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 137 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 139 (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 139 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 139 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 139 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 445 (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 445 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 445 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 445 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTP (Inbound only)"  -Direction Inbound  -Protocol Any -Action Block  -LocalPort 80  -Profile Any
+New-NetFirewallRule -DisplayName "Block HTTP TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 80  -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTPS (Inbound only)"  -Direction Inbound  -Protocol Any -Action Block  -LocalPort 443  -Profile Any
+New-NetFirewallRule -DisplayName "Block HTTPS TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 443  -Profile Any
 
-Write-Host "Firewall built."-ForeGroundColor Red
-Write-Host "Don't forget to ensure the firewall is manually enabled!" -ForeGroundColor Green
+
+New-NetFirewallRule -DisplayName "Block 135 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 135 -Action Block -Profile Any
+
+New-NetFirewallRule -DisplayName "Block 137 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 137 -Action Block -Profile Any
+
+New-NetFirewallRule -DisplayName "Block 139 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 139 -Action Block -Profile Any
+
+New-NetFirewallRule -DisplayName "Block 445 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 445 -Action Block -Profile Any
+
+New-NetFirewallRule -DisplayName "Block HTTP UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 80  -Profile Any
+
+New-NetFirewallRule -DisplayName "Block HTTPS UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 443  -Profile Any
+
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+
+Write-Host "Firewall built (and enabled)."-ForeGroundColor Red
