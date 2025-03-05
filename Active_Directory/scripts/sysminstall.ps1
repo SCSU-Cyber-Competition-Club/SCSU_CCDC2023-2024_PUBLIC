@@ -42,4 +42,4 @@ Remove-Item -Path $sysmonZip -Force
 Remove-Item -Path $sysmonExtractPath -Recurse -Force
 Remove-Item -Path $sysmonConfigPath -Force
 
-Write-Output "Sysmon Setup Completed Successfully!" -ForeGroundColor Red
+Write-Output "Sysmon Setup Completed Successfully!"
