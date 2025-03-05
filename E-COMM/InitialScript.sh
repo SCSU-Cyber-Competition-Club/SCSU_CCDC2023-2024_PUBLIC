@@ -3,9 +3,9 @@
 #move this file to home directory!!
 
 #installing dependencies
-yum install git
-yum install python3
-pip3 install ansi2html
+yum install git -y
+yum install python3 -y
+pip3 install ansi2html -y
 
 
 #add ansi2html to the PATH
@@ -25,6 +25,7 @@ read -p "Enter External Interface: " extInterface
 #resetting firewall to default settings
 
 firewall-cmd --zone=public --remove-service=dhcpv6-client --permanent
+firewall-cmd --zone=public --remove-service=ssh --permanent
 firewall-cmd --get-default-zone
 firewall-cmd --zone=trusted --add-interface=$intInterface --permanent
 firewall-cmd --zone=public --add-interface=$extInterface --permanent
@@ -47,10 +48,10 @@ firewall-cmd --list-all --zone=public
 
 
 
-yum remove telnet
-yum remove ssh
-yum remove cockpit
-yum remove open-ssh
+yum remove telnet -y
+yum remove ssh -y
+yum remove cockpit -y
+yum remove open-ssh -y
 
 #installing and running lynis
 git clone https://github.com/CISOfy/lynis
@@ -63,6 +64,25 @@ yum remove python3
 #listing installed packages
 
 yum list installed > installed_packages.txt
+
+#Setting up monitoring script
+sudo cp monitoring.sh /usr/local/sbin/security_monitoring
+sudo chmod 700 /usr/local/sbin/security_monitoring
+sudo touch /var/log/security_monitoring.log
+sudo touch /var/log/last_check_time
+sudo touch /var/log/previous_events.hash
+sudo touch /var/log/suid_files.list
+sudo chmod 640 /var/log/security_monitoring.log
+sudo chmod 640 /var/log/last_check_time
+sudo chmod 640 /var/log/previous_events.hash
+sudo chmod 640 /var/log/suid_files.list
+
+# Add sudoers entry for notify-send (safely using echo and tee)
+echo "root ALL=(ALL) NOPASSWD: /usr/bin/notify-send" | sudo EDITOR='tee -a' visudo
+
+#Adding monitoring script to crontab
+(crontab -l 2>/dev/null; echo "*/5 * * * * /usr/local/sbin/security_monitoring") | crontab -
+
 
 #Apache Hardening
 #need to add to this
@@ -80,7 +100,4 @@ echo -e 'Remember to run:\n netstat -plant\n netstat-planu\n top(htop, btop)\n c
 
 
 echo -e 'change admin folder'
-# Need to add installation for mod_security for apache
-
-#Next adds will all be for apache hardening.
 
