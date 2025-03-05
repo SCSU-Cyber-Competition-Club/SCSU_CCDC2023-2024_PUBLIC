@@ -1,6 +1,6 @@
 ﻿#Service names were provided by ChatGPT. These need to be tested before used in comp.
 
-
+Write-Host "Disabling naughty services..." -ForeGroundColor Red
 #RA Auto Connection Manager
 Stop-Service -Name "RasAuto" -Force
 Set-Service -Name "RasAuto" -StartupType Disabled
@@ -45,6 +45,8 @@ Set-Service -Name "Spooler" -StartupType Disabled
 #Set-Service -Name "LanmanServer" -StartupType Disabled
 #Stop-Service -Name "LanmanWorkstation" -Force
 #Set-Service -Name "LanmanWorkstation" -StartupType Disabled
+
+Write-Host "Risky services disabled." -ForeGroundColor Red
 
 #RA Connection Manager. This is hard to stop even with force for some reason...
 #Stop-Service -Name "RasMan" -Force
