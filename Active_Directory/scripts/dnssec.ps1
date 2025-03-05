@@ -23,7 +23,7 @@ do {
     Set-DNSSECForZone -ZoneName $zone
 
     # Step 3: Ask if there is another zone to configure
-    $anotherZone = Read-Host "Would you like to set up DNSSEC for another zone? (Don't forget the msdcs zones!) (Y/N)"
+    $anotherZone = Read-Host "Would you like to set up DNSSEC for another zone? (Don't forget the _msdcs zones!) (Y/N)"
 } while ($anotherZone -eq 'Y' -or $anotherZone -eq 'y')
 
 Write-Host "DNSSEC setup complete."
