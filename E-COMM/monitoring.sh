@@ -6,6 +6,16 @@ LAST_CHECK_FILE="/var/log/last_check_time"
 PREVIOUS_EVENTS_FILE="/var/log/previous_events.hash"
 SUID_FILE="/var/log/suid_files.list"
 
+# Determine the auth log file based on the system
+if [ -f "/var/log/auth.log" ]; then
+    AUTH_LOG="/var/log/auth.log"
+elif [ -f "/var/log/secure" ]; then
+    AUTH_LOG="/var/log/secure"
+else
+    echo "Could not find authentication log file"
+    exit 1
+fi
+
 # Function to send notifications
 notify_user() {
     local title="$1"
@@ -62,7 +72,7 @@ monitor_auth_log() {
     local new_entries
     
     # Check for new user additions
-    new_entries=$(grep "useradd\|adduser" /var/log/auth.log | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
+    new_entries=$(grep "useradd\|adduser" "$AUTH_LOG" | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
     if [ ! -z "$new_entries" ]; then
         notify_user "New User Account(s) Detected" "$new_entries" "critical"
         log_message "New user account(s) detected:"
@@ -70,7 +80,7 @@ monitor_auth_log() {
     fi
     
     # Check for group modifications
-    new_entries=$(grep "groupadd\|groupmod\|usermod" /var/log/auth.log | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
+    new_entries=$(grep "groupadd\|groupmod\|usermod" "$AUTH_LOG" | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
     if [ ! -z "$new_entries" ]; then
         notify_user "Group Modification(s) Detected" "$new_entries" "critical"
         log_message "Group modification(s) detected:"
@@ -78,7 +88,7 @@ monitor_auth_log() {
     fi
 
     # Check for password changes
-    new_entries=$(grep "passwd\|password changed" /var/log/auth.log | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
+    new_entries=$(grep "passwd\|password changed" "$AUTH_LOG" | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
     if [ ! -z "$new_entries" ]; then
         notify_user "Password Change(s) Detected" "$new_entries" "critical"
         log_message "Password change(s) detected:"
@@ -86,7 +96,7 @@ monitor_auth_log() {
     fi
 
     # Check for login attempts (both successful and failed)
-    new_entries=$(grep "session opened\|Failed password\|authentication failure" /var/log/auth.log | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
+    new_entries=$(grep "session opened\|Failed password\|authentication failure" "$AUTH_LOG" | awk -v last_check="$last_check" '{ if ($1$2$3 > last_check) print $0 }')
     if [ ! -z "$new_entries" ]; then
         # All login activity is now critical
         notify_user "Login Activity Detected" "$new_entries" "critical"
