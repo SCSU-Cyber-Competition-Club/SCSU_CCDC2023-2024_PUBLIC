@@ -25,9 +25,6 @@ Set-Service -Name "UmRdpService" -StartupType Disabled
 #Stop-Service -Name "RpcLocator"
 #Set-Service -Name "RpcLocator" -StartupType Disabled
 
-Stop-Service -Name "RemoteRegistry" -Force
-Set-Service -Name "RemoteRegistry" -StartupType Disabled
-
 #Routing and Remote Access
 Stop-Service -Name "RemoteAccess" -Force
 Set-Service -Name "RemoteAccess" -StartupType Disabled
