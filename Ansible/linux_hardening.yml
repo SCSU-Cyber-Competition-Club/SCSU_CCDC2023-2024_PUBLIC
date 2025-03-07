@@ -1,0 +1,77 @@
+---
+-name: Linux Security Hardening
+ hosts: Linux
+ become: yes
+ any_errors_fatal: false #ensuring code execution despite errors
+ force_handlers: true #runs handlers despite errors
+ tasks:
+
+   -name: Debian System Updates
+    apt:
+      update_cache: yes
+      upgrade: dist
+    when: ansible_os_family | lower == "Debian"
+    
+  -name: Redhat System Updates
+    yum:
+      name: "*"
+      state: latest
+    when: ansible_os_family | lower == "Redhat"
+    
+  -name: Installing security packages
+    package:
+      name:
+        - ufw
+        - fail2ban
+      state: present
+    when: ansible_os_family | lower == "Debian"
+
+    -name: Installing firewalld on Redhat systems
+      package:
+        name: firewalld
+        state: present
+      when: ansible_os_family | lower == "Redhat"
+      
+    -name: Enable and start firewall
+      service:
+        name: "{{ 'ufw' if ansible_os_family | lower == 'Debian' else 'firewalld' }}"
+        state: started
+        enabled: yes
+      
+    -name: Allow SSH through firewall
+      command: ufw allow 22/tcp
+      when: ansible_os_family | lower == 'Debian'
+      
+    -name: Allow SSH through firewalld
+      firewalld:
+        service: ssh
+        permanent: yes
+        state: enabled
+      when: ansible_os_family | lower == 'Redhat'
+      
+    -name: Hardening SSH
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "^{{ item.key }}"
+        line: "{{ item.key }} {{ item.value }}"
+        state: present
+      loop:
+        - { key: 'PermitRootLogin', value: 'no' }
+        - { key: 'PasswordAuthentication', value: 'no' }
+        - { key: 'X11Forwarding', value: 'no' }
+        - { key: 'MaxAuthTries', value: '3' }
+        - { key: 'ClientAliveInterval', value: '300' }
+        - { key: 'ClientAliveCountMax', value: '2' }
+      notify: Restart SSH
+
+    -name: Enable fail2ban 
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes
+        
+handlers:
+  -name: Restart SSH
+    service:
+      name: ssh
+      state: restarted
