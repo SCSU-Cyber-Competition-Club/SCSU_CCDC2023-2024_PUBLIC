@@ -1,0 +1,22 @@
+---
+-name: Restricting Sudo Access
+  hosts: linux
+  become: yes
+  tasks:
+    -name: Get users list
+      command: "getent group wheel"
+      register: wheel_group
+      changed_when: false
+
+    -name: Removal of Users
+      command: "gpasswd -d {{ item }} wheel"
+      loop: "{{ wheel_group.stdout.split(':')[-1].split(',') | difference(['<new_user>']) }}"
+      when: wheel_group.stdout | length > 0
+      ignore_errors: yes
+
+    -name: Ensure <new_user> is remaining in the wheel group
+      user:
+        name: "<new_user>"
+        groups: wheel
+        append: yes
+        
