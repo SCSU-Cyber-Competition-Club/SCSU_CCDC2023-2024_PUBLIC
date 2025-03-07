@@ -1,0 +1,113 @@
+[https://appid.cisco.com/home](https://appid.cisco.com/home)
+
+# DMZ
+## Email
+1. ICMP
+2. syslog
+3. SSL
+4. POP3
+5. POP3S
+6. SMTP
+7. SMTPS
+8. IMAP
+9. IMAPS
+10. HTTP
+11. HTTP/2
+12. HTTP/3
+13. HTTPS
+14. NTP
+15. DNS
+16. LDAP
+17. LDAPS
+
+## DNS-NTP
+1. ICMP
+2. syslog
+3. SSL
+4. DNS
+5. NTP
+6. HTTP
+7. HTTP/2
+8. HTTP/3
+9. HTTPS
+
+## Web
+1. ICMP
+2. syslog
+3. SSL
+4. DNS
+5. NTP
+6. HTTP
+7. HTTP/2
+8. HTTP/3
+9. HTTPS
+
+## Snipe-IT
+1. ICMP
+2. syslog
+3. SSL
+4. DNS
+5. NTP
+6. HTTP
+7. HTTP/2
+8. HTTP/3
+9. HTTPS
+10. POP3
+11. POP3S
+12. SMTP
+13. SMTPS
+14. IMAP
+15. IMAPS
+16. LDAP?
+
+# Server LAN
+
+## SecurityOnion
+1. ICMP
+2. syslog
+3. SSL
+4. DNS
+5. NTP
+6. HTTP
+7. HTTP/2
+8. HTTP/3
+9. HTTPS
+10. TCP - 5000, 8086, 4505, 4506, 8220, 8443, 5055, 9200, 9300, 9696, 5056
+
+## AD-DNS-DHCP
+1. ICMP
+2. syslog
+3. LDAPS
+4. LDAP
+5. SSL
+6. DNS
+7. NTP
+8. HTTP
+9. HTTP/2
+10. HTTP/3
+11. HTTPS
+
+# Workstation LAN
+
+## Ubuntu
+1. ICMP
+2. syslog
+3. SSL
+4. DNS
+5. NTP
+6. HTTP
+7. HTTP/2
+8. HTTP/3
+9. HTTPS
+## Windows10
+1. ICMP
+2. syslog
+3. LDAPS
+4. SSL
+5. DNS
+6. NTP
+7. HTTP
+8. HTTP/2
+9. HTTP/3
+10. HTTPS
+
