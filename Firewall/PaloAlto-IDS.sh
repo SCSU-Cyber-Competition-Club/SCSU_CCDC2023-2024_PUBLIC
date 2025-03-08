@@ -253,7 +253,7 @@ SERVICE_OBJECT_RESPONSE
 # action - action
 
 echo
-echo "Start of Securtiy Rules"
+echo "Start of Security Rules"
 echo
 
 # to-External Section
@@ -1910,7 +1910,8 @@ respsonse=$(curl -k -s -X POST \
                     "ldap",
                     "web-browsing",
                     "ssl",
-                    "splunk"
+                    "splunk",
+                    "ssh"
                 ]
             },
             "category": {
