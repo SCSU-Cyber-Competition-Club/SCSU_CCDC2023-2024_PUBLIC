@@ -7,3 +7,4 @@
 & "./llmnr.ps1"
 & "./services.ps1"
 & "./sysminstall.ps1"
+& "./basicEnum.ps1"
