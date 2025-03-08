@@ -301,34 +301,3 @@ POST_RESPONSE=$(curl -s -k -X POST \
   }")
 WKSTLAN_ZONE_ID=$(echo "$POST_RESPONSE" | grep -o '"id" *: *"[^"]*"' | sed 's/.*: *"\([^"]*\)"/\1/')
 RESPONSE_CHECK
-echo
-
-# Create Access Policy Rules
-# Create Access Policy Rules
-# Create Access Policy Rules
-
-# Get Access Policy ID
-ACCESSPOLICYID=$(curl -s -k -X GET "${URL2}/policy/accesspolicies" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer ${API_KEY}" | \
-     grep '"id" : ' | sed 's/.*"id" : "\(.*\)",/\1/')
-
-# Print the Access Policy ID
-echo "Access Policy ID: $ACCESSPOLICYID"
-echo
-
-
-# Get Zone ID - Outside
-ZONEID=$(curl -s -k -X GET "${URL2}/object/securityzones" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer ${API_KEY}")
-
-OUTSIDE_ZONE_ID=$(echo "$ZONEID" | grep -A 6 '"name" : "outside_zone"' | grep '"id" :' | sed 's/.*"id" : "\([^"]*\)".*/\1/')
-
-
-# Get Zone ID - Inside
-ZONEID=$(curl -s -k -X GET "${URL2}/object/securityzones" \
-     -H "Content-Type: application/json" \
-     -H "Authorization: Bearer ${API_KEY}")
-
-INSIDE_ZONE_ID=$(echo "$ZONEID" | grep -A 6 '"name" : "inside_zone"' | grep '"id" :' | sed 's/.*"id" : "\([^"]*\)".*/\1/')
