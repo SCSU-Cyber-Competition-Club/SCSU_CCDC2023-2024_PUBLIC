@@ -5,8 +5,11 @@
 & "./firewall2.ps1"
 & "./preauth.ps1"
 & "./llmnr.ps1"
+& "./smb.ps1"
+& "./netbios.ps1"
+& "./basicEnum.ps1"
 & "./services.ps1"
 & "./sysminstall.ps1"
-& "./basicEnum.ps1"
-& "./netbios.ps1"
-& "./smb.ps1"
+
+
+
