@@ -5,18 +5,19 @@
   tasks:
     -name: Get users list
       command: "getent group wheel"
-      register: wheel_group
+      register: wheel_group_output
       changed_when: false
 
     -name: Removal of Users
       command: "gpasswd -d {{ item }} wheel"
-      loop: "{{ wheel_group.stdout.split(':')[-1].split(',') | difference(['<new_user>']) }}"
-      when: wheel_group.stdout | length > 0
-      ignore_errors: yes
-
-    -name: Ensure <new_user> is remaining in the wheel group
+      loop: "{{ wheel_group.stdout.split(':')[-1].split(',') }}"
+      
+    -name: Remove Extra Users
       user:
-        name: "<new_user>"
-        groups: wheel
-        append: yes
+        name: "{{ item }}"
+        groups: "{{ (item in ['user1', 'user2']) | ternary('wheel', '') }}"
+        append: no
+      loop: ""{{ wheel_users }}"
+      when: item not in ['user1', 'user2']
+      ignore_errors: yes
         
