@@ -12,5 +12,5 @@
     Get-Acl $path -Audit | Format-List Path,AuditToString | Out-File -FilePath 'file_after.txt' -Width 200 -Append
     }
 
-AddAuditToFile -path ./creds_for_script.csv
+AddAuditToFile -path ./creds_FW_webmail.csv
 
