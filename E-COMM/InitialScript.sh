@@ -65,6 +65,13 @@ yum remove python3
 
 yum list installed > installed_packages.txt
 
+#Backup for prestashop SQL database (to root directory)
+mysqldump -u root -p prestashop > /root/prestashop_backup.sql
+
+#Backup for HTML files (to root directory)
+cp -r /var/www/html /root/html.bak.1
+
+echo -e 'Backups have been saved, they are located in the root directory'
 
 #Apache Hardening
 #need to add to this
