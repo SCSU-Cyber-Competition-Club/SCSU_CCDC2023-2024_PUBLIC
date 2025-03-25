@@ -1,4 +1,6 @@
-﻿# Function to set up DNSSEC for a given zone
+## If I explain DNSSec in commentation, this file will be 3x as large. Find the article that explains it best for ya.
+
+ # Function to set up DNSSEC for a given zone
 function Set-DNSSECForZone {
     param (
         [string]$ZoneName
