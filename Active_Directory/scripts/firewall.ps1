@@ -21,17 +21,17 @@ New-NetFirewallRule -DisplayName "Block SSDP"  -Direction Inbound  -Protocol Any
 # The above four are dangerous ports, especially with Zerologon (which our system won't/can't have received the patch for);
 # However, as a domain controller, your system NEEDS to send data OUT to the domain through these ports.
 # In our environment (especially considering there's only one domain controller), this traffic can be blocked INBOUND without interfering with scoring.
-New-NetFirewallRule -DisplayName "Block 135 TCP (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 135 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 135 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 135 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 137 TCP (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 137 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 137 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 137 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 139 TCP (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 139 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 139 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 139 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block 445 TCP (Inbound only)"  -Direction Inbound  -Protocol Any  -LocalPort 445 -Action Block -Profile Any
+New-NetFirewallRule -DisplayName "Block 445 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 445 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTP TCP (Inbound only)"  -Direction Inbound  -Protocol Any -Action Block  -LocalPort 80  -Profile Any
+New-NetFirewallRule -DisplayName "Block HTTP TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 80  -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTPS TCP (Inbound only)"  -Direction Inbound  -Protocol Any -Action Block  -LocalPort 443  -Profile Any
+New-NetFirewallRule -DisplayName "Block HTTPS TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 443  -Profile Any
 
 
 New-NetFirewallRule -DisplayName "Block 135 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 135 -Action Block -Profile Any
