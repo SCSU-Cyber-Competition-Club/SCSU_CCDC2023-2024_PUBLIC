@@ -1,4 +1,5 @@
-﻿# Define Variables
+#Install Sysmon and get 'er runnin'.
+ # Define Variables
 $sysmonUrl = "https://download.sysinternals.com/files/Sysmon.zip"
 $sysmonZip = "$env:TEMP\Sysmon.zip"
 $sysmonExtractPath = "$env:TEMP\Sysmon"
