@@ -1,3 +1,5 @@
+# Similar to LLMNR, NetBIOS Name Service is a legacy protocol handling name resolution rife with vulnerabilities not present
+# in DNS.
 Write-Host "Initiating NetBIOS script..." -ForeGroundColor Red
 
 $base = "HKLM:SYSTEM\CurrentControlSet\Services\NetBT\Parameters\Interfaces"
