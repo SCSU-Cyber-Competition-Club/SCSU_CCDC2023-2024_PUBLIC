@@ -6,5 +6,5 @@ Write-Host "Dealing with no-pre-auth accounts..." -ForeGroundColor Red
  
  Get-ADUSer -Filter 'DoesNotRequirePreAuth -eq $true ' | Set-ADAccountControl -doesnotrequirepreauth $false
  Get-ADComputer -Filter 'DoesNotRequirePreAuth -eq $true ' | Set-ADAccountControl -doesnotrequirepreauth $false
-# Get-ADUSer -Filter 'DoesNotRequirePreAuth -eq $true ' | Set-ADAccountControl -doesnotrequirepreauth $false
+ Get-ADServiceAccount -Filter 'DoesNotRequirePreAuth -eq $true ' | Set-ADAccountControl -doesnotrequirepreauth $false
  Write-Host "All preauthentication has been purged." -ForeGroundColor Red
