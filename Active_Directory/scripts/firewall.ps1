@@ -46,6 +46,12 @@ New-NetFirewallRule -DisplayName "Block HTTP UDP (Inbound only)"  -Direction Inb
 
 New-NetFirewallRule -DisplayName "Block HTTPS UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 443  -Profile Any
 
+#YOU SHOULD PROBABLY UNCOMMENT THESE TWO! Kerberos authentication ports. I only have them commented out as I didn't get a chance to test them
+#myself in our competition, so I can't verify things won't break.
+#Once you have access to the environment, uncomment it, test it, make sure it works.
+#New-NetFirewallRule -DisplayName "Block 88 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 88 -Action Block -Profile Any
+#New-NetFirewallRule -DisplayName "Block 88 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 88 -Action Block -Profile Any
+
 # Creating rules for a firewall doesn't mean the firewall is enabled. In previous competitions, the firewalls have been disabled initially.
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
 
