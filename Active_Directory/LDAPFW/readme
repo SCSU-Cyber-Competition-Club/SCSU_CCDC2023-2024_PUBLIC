@@ -1,3 +1,6 @@
+IMPORTANT: Unfortunately, the configuration of the DC machines in CCDC results in LDAPFW not working. This potentially could be resolved, though. if you want to give it a shot when you have access to the practice environment.
+The issue is that LDAPFW requires symbols to be loaded from the web for it to run. If you're able to find the IP the symbols are loaded from and add it to the gitResolution.ps1 script (which adds entries to the hosts file for resolution), this potentially could resolve the issue.
+
 LDAP Firewall. Lot of potential with this depending on how configuration is set up. Its primary purpose is monitoring for LDAP reconnaisance, and the sample configuration provided (ReconAuditTemplate) will set you up nicely for this.
 You can get more granular, though; configuration can be modified to not just monitor but prevent certain actions, such as preventing SPN enumeration (e.g. DACLPrevention_config).
 
