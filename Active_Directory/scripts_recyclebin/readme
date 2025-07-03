@@ -1,3 +1,5 @@
+For scripts made whose usage was decided against. Archived just in case they can be used/transformed in some way for a future use case. Please try to add why a script is placed here if you do so.
+
 SPNumerate was an overly complex script with a dirty output. Furthermore, this can be done precomp with access to the environment.
 
 Account_cull was arguably more tedious than the manual process, and more importantly, there's no accounts that should be deleted. (Scoring users are, well, for scoring.)
