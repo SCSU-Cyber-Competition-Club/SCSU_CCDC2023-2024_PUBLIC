@@ -1,2 +1,0 @@
-﻿Set-GPRegistryValue -Name "Default Domain Policy" -Key "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Kerberos" -ValueName "KdcRequired" -Type DWord -Value 1
-Write-Host "Success. Kerberos authentication now requires KDC signing."
