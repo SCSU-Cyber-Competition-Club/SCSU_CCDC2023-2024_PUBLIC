@@ -1,5 +1,7 @@
 #! /bin/bash
 
+#Liam Browning
+
 #Restoring MySQL Backup (Comment this out if it was a website defacement)
 
 mysql -u root -p prestashop < /root/prestashop_backup.sql

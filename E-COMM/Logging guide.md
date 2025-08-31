@@ -21,6 +21,11 @@
 ##### *View List of files opened by users*
 `lsof -u <user name>`
 ##### *Root user history*
+
+##### *Network Traffic*
+`netstat -plant` for TCP
+`netstat -planu` for UDP
+
 Bash
 `cat /root/.bash_history`
 
