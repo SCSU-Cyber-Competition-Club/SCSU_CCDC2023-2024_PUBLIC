@@ -123,6 +123,8 @@ don't really see a powershell equivalent
 - Check the box for "Disable NetBIOS over TCP/IP"
 
 # Force NTLMv2 with EPA:
+-**NOTE: I'm pretty sure this isn't necessary if you're enforcing Kebereros (see above), though it may be if there's legacy systems that can't use Kerberos...**
+(unlikely, but possible, so leaving this in here just in case)
 - **Associated script:** `EPA.ps1`
 - Start menu -> Registry Editor
 - **HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LSA**
@@ -135,11 +137,8 @@ don't really see a powershell equivalent
 
 # SMB Hardening:
 - **Associated script:** `smb.ps1`
-- Just use PowerShell for this...
-- Start menu -> Powershell -> Right click -> **Run as administrator**
-- Set-SmbServerConfiguration -EnableSMB1Protocol $false -Force
-- Set-SmbServerConfiguration -EnableSMB2Protocol $false -Force
-- Set-SmbServerConfiguration -EnableSMB3Protocol $false -Force
+- **Oops. looks like I left in a methodology for this that is completely wrong, and hallucinated by ChatGPT. See the smb.ps1 script for how to do this properly**
+- (it's more complicated than it should be. Unlike SMB1 and SMB2, there is NOT an -EnableSmb3Protocol powershell command)
 
 
 
