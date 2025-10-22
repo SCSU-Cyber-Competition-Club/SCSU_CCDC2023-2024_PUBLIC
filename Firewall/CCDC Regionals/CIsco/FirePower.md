@@ -1,4 +1,4 @@
-https://upw.io/4zH/Cisco_Secure_Firewall_Threat_Defense_Virtual-7.2.0-82.qcow2
+Cisco_Secure_Firewall_Threat_Defense_Virtual-7.2.0-82.qcow2
 
 https://www.eve-ng.net/index.php/documentation/howtos/firepower-7/
 
