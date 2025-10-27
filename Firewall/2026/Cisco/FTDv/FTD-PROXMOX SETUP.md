@@ -1,6 +1,7 @@
 
 download proxmox image, launch through VMWare (or whatever hypervisor, I used VMWare tho)
 - beef it up with a little extra resources than you'll need for whatever VM(s) you'll be running within
+- In the Processors tab for Proxmox's VM (might be a bit different with non-VMWare, make sure that "Virtualize VT-x..." is enabled. If this gives you an error, troubleshoot it, it will be required (would give tips on fixing this if there weren't 10000 things that can be the cause apparently, reach out to Carl if you need help)
 
 launch proxmox, go through configuration process; afterwards...
 
