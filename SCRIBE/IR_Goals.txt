@@ -1,0 +1,9 @@
+1.What proof do you have that Red Team compromised your system?
+  Do you have a screenshot?
+2. When did the attack happen?
+  Timestamps are important!
+3. How and when was the attack was detected?
+  Again, timestamps!
+4. Can you explain what the attack was, and what impact it had on your system?
+5. How was the attack's impact remediated?
+6. How are you preventing the attack from happening again in the future?
