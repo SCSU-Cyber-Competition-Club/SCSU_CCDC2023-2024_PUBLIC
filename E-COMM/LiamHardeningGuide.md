@@ -22,7 +22,6 @@ lock accounts with `sudo passwd -l [username]`
                                                               `mysql -u root-p mysql`
                                                               `update user set password=PASSWORD("[new password]") where user='root';`
                                                               `flush privileges;`
-8. fix yum repos. These have been changed to vault instead of release. Script should be in the SCSU CCDC github
 
 9. Change firewall rules, basic script is located in SCSU github as well. (`sudo firewall-cmd --list-all` will list all firewall rules to double check them)
 
