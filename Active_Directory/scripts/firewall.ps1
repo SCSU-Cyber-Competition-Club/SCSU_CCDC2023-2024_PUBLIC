@@ -29,9 +29,9 @@ New-NetFirewallRule -DisplayName "Block 139 TCP (Inbound only)"  -Direction Inbo
 
 New-NetFirewallRule -DisplayName "Block 445 TCP (Inbound only)"  -Direction Inbound  -Protocol TCP  -LocalPort 445 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTP TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 80  -Profile Any
+#New-NetFirewallRule -DisplayName "Block HTTP TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 80  -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTPS TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 443  -Profile Any
+#New-NetFirewallRule -DisplayName "Block HTTPS TCP (Inbound only)"  -Direction Inbound  -Protocol TCP -Action Block  -LocalPort 443  -Profile Any
 
 
 New-NetFirewallRule -DisplayName "Block 135 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 135 -Action Block -Profile Any
@@ -42,9 +42,9 @@ New-NetFirewallRule -DisplayName "Block 139 UDP (Inbound only)"  -Direction Inbo
 
 New-NetFirewallRule -DisplayName "Block 445 UDP (Inbound only)"  -Direction Inbound  -Protocol UDP  -LocalPort 445 -Action Block -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTP UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 80  -Profile Any
+#New-NetFirewallRule -DisplayName "Block HTTP UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 80  -Profile Any
 
-New-NetFirewallRule -DisplayName "Block HTTPS UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 443  -Profile Any
+#New-NetFirewallRule -DisplayName "Block HTTPS UDP (Inbound only)"  -Direction Inbound  -Protocol UDP -Action Block  -LocalPort 443  -Profile Any
 
 #YOU SHOULD PROBABLY UNCOMMENT THESE TWO! Kerberos authentication ports. I only have them commented out as I didn't get a chance to test them
 #myself in our competition, so I can't verify things won't break.
@@ -56,3 +56,4 @@ New-NetFirewallRule -DisplayName "Block HTTPS UDP (Inbound only)"  -Direction In
 Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
 
 Write-Host "Firewall built (and enabled)."-ForeGroundColor Red
+
