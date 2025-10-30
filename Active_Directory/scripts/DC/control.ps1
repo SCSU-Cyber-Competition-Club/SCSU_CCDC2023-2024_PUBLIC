@@ -3,6 +3,7 @@
 #1. Add lines for all of the hardening scripts you're bringing into the comp, and remove ones for scripts that might be here but aren't being used anymore
 #2. Ensure this script is in the same directory as the hardening scripts
 & "./delegation.ps1"
+& "./KerbLogging.ps1"
 & "./adminlockout.ps1"
 & "./firewall.ps1"
 & "./preauth.ps1"
