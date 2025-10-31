@@ -1,3 +1,5 @@
+# COMMIT OFTEN! DEPLOYMENT BUTTON AT TOP!
+
 ### Change admin password!
 
 - top right, click username or System -> Users
