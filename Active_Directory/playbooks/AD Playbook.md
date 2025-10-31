@@ -127,13 +127,7 @@ don't really see a powershell equivalent
 	- `Computer configuration/Administrative Templates/Printers`
 	- Disable "Allow Print Spooler to accept client connections"
 	
-- 
-- ### LDAP signing
-	- **STILL HAVE CAUTION WITH THIS...**
-	- Computer config -> Policies -> Windows settings -> Security settings -> Local policies -> Security options
-	- right click `Domain Controller: LDAP server signing requirements`, Properties
-	- enable `Define this policy settings`
-	- select `Require signing`
+
 
 - ### protecting IP traffic by requiring Kerberos:
 	- `Computer Configuration -> Windows Settings -> Security Settings -> IP Security Policies`
