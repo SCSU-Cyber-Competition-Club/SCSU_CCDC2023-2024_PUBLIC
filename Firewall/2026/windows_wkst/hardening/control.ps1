@@ -7,7 +7,8 @@
 & "./llmnr.ps1"
 & "./netbios.ps1"
 & "./services.ps1"
-& "./smb_client.ps1"
+& "./firewall.ps1"
+#& "./smb_client.ps1"
 & "./sysminstall.ps1"
 
 
