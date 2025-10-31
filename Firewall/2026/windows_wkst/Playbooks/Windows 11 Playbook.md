@@ -18,7 +18,7 @@
 	- download files manually
 - otherwise, simply:
 	- open PowerShell
-	- curl -L -o repo.zip https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC/archive/refs/heads/main.zip 
+	- curl -o repo.zip https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC/archive/refs/heads/main.zip 
 	- **UNDERSCORE AFTER 2024 ^**
 	- or https://tinyurl.com/37f85fbn
 	- use file manager to unzip folder, make a copy of what you need, then **delete anything else. delete from recycle bin as well** 
