@@ -1,3 +1,10 @@
+### Change admin password!
+
+- top right, click username or System -> Users
+- find your user
+	- delete any unneeded users as well, if present...
+- Edit (pencil icon)
+
 
 ### Configure Network Objects (if not already done)
 
