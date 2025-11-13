@@ -28,7 +28,7 @@
 	- download files manually
 - otherwise, simply:
 	- open PowerShell
-	- curl -L -o repo.zip https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC/archive/refs/heads/main.zip 
+	- curl.exe -L -o repo.zip https://github.com/SCSU-Cyber-Competition-Club/SCSU_CCDC2023-2024_PUBLIC/archive/refs/heads/main.zip 
 	- **UNDERSCORE AFTER 2024 ^**
 	- or https://tinyurl.com/37f85fbn
 	- use file manager to unzip folder, make a copy of what you need, then **delete anything else. delete from recycle bin as well** 
@@ -117,7 +117,7 @@ don't really see a powershell equivalent
 	- Ensure **only** AES256 is enabled
 
 - ### Counter LLMNR poisoning:
-	- **Associated script:** `vaccine.ps1`
+	- **Associated script:** `llmnr.ps1`
 	- Back up to beginning of path in the GPO
 	- **Computer Configuration -> Policies -> Administrative Templates -> Network -> DNS Client
 	- Turn off multicast name resolution
@@ -127,11 +127,6 @@ don't really see a powershell equivalent
 	- `Computer configuration/Administrative Templates/Printers`
 	- Disable "Allow Print Spooler to accept client connections"
 	
-
-
-- ### protecting IP traffic by requiring Kerberos:
-	- `Computer Configuration -> Windows Settings -> Security Settings -> IP Security Policies`
-	- Enable `Secure Server...`
 	
 # Counter NBT-NS poisoning
 - #### This will require a system restart!
@@ -146,18 +141,6 @@ don't really see a powershell equivalent
 - WINS tab
 - Check the box for "Disable NetBIOS over TCP/IP"
 
-# Force NTLMv2 with EPA:
-- **Associated script:** `EPA.ps1`
-- ---**only bother if we can't disable ntlmv2**---, **otherwise skip this**
-- Start menu -> Registry Editor
-- **HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\LSA**
-- to be enabled, **SuppressExtendedProtection** and **LmCompatibilityLevel** should be present. if not:
-- Top left, click Edit/New/DWORD value/type `SuppressExtendedProtection`
-- same for `LmCompatabilityLevel`
-- then, for each:
-	- Right click/Modify
-	- Value 0 for Suppress, Value 5 for LmComp
-
 
 # Harden SMB
 
@@ -166,18 +149,8 @@ don't really see a powershell equivalent
 	- `Associated script: smb.ps1`
 	- Set-SmbServerConfiguration -EnableSMB1Protocol $false
 	- Set-SmbServerConfiguration -EnableSMB2Protocol $true
-- Enable SMB signing:
-	- in the following paths, right click the pane, create two new DWords, name them `EnableSecuritySignature` and `RequireSecuritySignature`, set value to 1:
-	- HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanManWorkstation\Parameters
-	- HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\LanManServer\Parameters
-	- or, do thru Powershell, i.e.
-`"HKLM\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" /v RequireSecuritySignature /t REG_DWORD /d 1 /f`
 
 
-
-## enable all logging
-
-`auditpol /set /category:* /success:enable /failure:enable`
 
 ### CVE-2020-1350
 `reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DNS\Parameters" /v TcpReceivePacketSize /t REG_DWORD /d 65280 /f`
