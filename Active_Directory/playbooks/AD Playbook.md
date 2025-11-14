@@ -1,4 +1,4 @@
-# Delete scripts after use! -RemoveItem `script` -force 
+# Delete scripts after use! Remove-Item `script` -force 
 # Or, if just using file directory, delete from recycle bin as well!
 
 # Force GP update after running! Invoke-GPUpdate -Force
