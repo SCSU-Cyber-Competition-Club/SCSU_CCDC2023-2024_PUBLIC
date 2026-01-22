@@ -2,7 +2,6 @@
 
 **THE SCRIPT WILL NOT WORK** unless you give it the proper arguments when calling:
 - IP address of the Splunk host
-  - For the state competition at least, this will be 172.20.242.20
 - Username of the Splunk host's admin account
 - Password of the Splunk host's admin account
 
