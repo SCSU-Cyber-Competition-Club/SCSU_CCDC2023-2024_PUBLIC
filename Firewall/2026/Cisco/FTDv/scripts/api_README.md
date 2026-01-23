@@ -1,3 +1,7 @@
+This script works with Cisco FDM. In the 2025/2026 season, **the competition used Cisco FMC. This script does not work with Cisco FMC.** 
+Also, with either FDM or FMC, posting a rule would require you to have the IDs for network objects, etc., so this is probably a lost cause. But hey, I worked
+on this, so it's here.
+
 `api_rules.sh` demonstrates everything you'll need to add rules through the API with a script.
 Before getting to that, though: THIS WILL NOT WORK OFF THE BAT IN THE COMPETITION. API access was restricted; it must be enabled.
 
