@@ -1,0 +1,8 @@
+& "./KerbLogging.ps1"
+& "./firewall.ps1"
+& "./llmnr.ps1"
+& "./smb_client.ps1"
+& "./netbios.ps1"
+& "./loginBanner.ps1"
+& "./services.ps1"
+& "./sysminstall.ps1"
