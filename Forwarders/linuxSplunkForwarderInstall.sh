@@ -230,7 +230,7 @@ setup_monitors() {
   # Consolidated list of monitors. Splunk will gracefully ignore files that do not exist on the host.
   MONITORS="
 #Test log
-[monitor://var/log]
+[monitor:///var/log]
 index = main
 sourcetype = test
 "
