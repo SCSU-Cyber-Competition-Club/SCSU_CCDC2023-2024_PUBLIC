@@ -1,9 +1,11 @@
 param (
-    # Optional: Specify the IP address of the Splunk Indexer (receiver).
+    # Specify the IP address of the Splunk Indexer (receiver).
+    [Parameter(Mandatory=$true)]
     [string]$INDEXER_IP = "172.20.242.20",
 
-    # Optional: Specify the hostname to be used by Splunk.
+    # Specify the hostname to be used by Splunk.
     # Defaults to the machine's current hostname.
+    [Parameter(Mandatory=$true)]
     [string]$SplunkHostname = $env:COMPUTERNAME
 )
 
@@ -82,3 +84,4 @@ Write-Host "Setting Splunk Universal Forwarder to start on boot..."
 Start-Process -FilePath "$INSTALL_DIR\bin\splunk.exe" -ArgumentList "enable boot-start" -Wait
 
 Write-Host "Splunk Universal Forwarder installation and configuration complete!"
+
