@@ -1,0 +1,3 @@
+https://github.com/CedarvilleCyber/CCDC/tree/main/windows-scripts
+
+Download Splunk from here

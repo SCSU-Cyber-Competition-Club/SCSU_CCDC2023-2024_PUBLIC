@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Flush existing rules and set default policies to DROP
+iptables -F
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+iptables -P OUTPUT DROP
+
+# Allow loopback communication
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+
+# Allow HTTP (port 80) and HTTPS (port 443) outbound
+iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow DNS (UDP) outbound
+iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+
+# Allow NTP (UDP) outbound and inbound
+iptables -A OUTPUT -p udp --dport 123 -j ACCEPT
+iptables -A INPUT -p udp --dport 123 -j ACCEPT
+
+# Allow incoming ICMP (ping) requests
+iptables -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# Allow HTTP (port 80), HTTPS (port 443) inbound
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+
+# Allow local MariaDB connections (on the loopback interface)
+iptables -A INPUT -i lo -p tcp --dport 3306 -j ACCEPT
+
+# Save the rules so they persist after a reboot
+service iptables save
+
+# Restart the firewall to apply the rules
+service iptables restart
