@@ -81,7 +81,7 @@ Write-Host "--- STARTING HARDENING (VERBOSE MODE) ---" -ForegroundColor Cyan
 Remove-Feature -FeatureName "MicrosoftWindowsPowerShellV2Root" -Description "PowerShell v2.0"
 Remove-Feature -FeatureName "SMB1Protocol" -Description "SMBv1 Protocol"
 Remove-Feature -FeatureName "Telnet-Client" -Description "Telnet Client"
-Remove-Feature -FeatureName "Telnet-Server" -Description "Telnet Server"
+Remove-Feature -FeatureName "Telnet-Server" -Description "Telnet Server"    
 
 # --- 2. DISABLE SERVICES ---
 Secure-Service -ServiceName "SSDPSRV" -Description "UPnP Discovery"
@@ -117,6 +117,8 @@ catch {
 # --- 4. AUTHENTICATION (NTLM) ---
 # NTLMv1 Removal / Force NTLMv2
 Set-RegKey -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" -Name "LmCompatibilityLevel" -Value 5 -Description "NTLM Hardening (Level 5)"
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa\MSV1_0" -Name "RestrictIncomingNTLMTraffic" -Value 2
+Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Lsa\MSV1_0" -Name "RestrictSendingNTLMTraffic" -Value 2
 
 # --- 5. NETBIOS DISABLE ---
 Write-Host "Disabling NetBIOS on Network Adapters..." -NoNewline
