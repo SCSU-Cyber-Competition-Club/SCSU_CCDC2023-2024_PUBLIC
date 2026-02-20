@@ -1,4 +1,4 @@
-# SCSU CCDC-24/25 
+# SCSU CCDC-25/26 
 - Repository for SCSU Cyber Competition Club
 - Files not to be merged will be in the .gitignore file.
 
