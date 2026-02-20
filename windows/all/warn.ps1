@@ -93,7 +93,7 @@ Secure-Service -ServiceName "XblGameSave" -Description "Xbox Game Save"
 Secure-Service -ServiceName "XboxNetApiSvc" -Description "Xbox Net API"
 Secure-Service -ServiceName "DiagTrack" -Description "Telemetry (DiagTrack)"
 Secure-Service -ServiceName "bthserv" -Description "Bluetooth Service"
-Secure-Service -ServiceName "MapsBrooutdated legacy / unnecessary / unneeded pieces of software do i need to disableker" -Description "Downloaded Maps Manager"
+Secure-Service -ServiceName "MapsBroker" -Description "Downloaded Maps Manager"
 Secure-Service -ServiceName "lfsvc" -Description "Geolocation Service"
 Secure-Service -ServiceName "WerSvc" -Description "Windows Error Reporting"
 
